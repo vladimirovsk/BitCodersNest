@@ -1,0 +1,1 @@
+export const ERROR_BAD_TOKEN_INFO = 'Bad token info';
