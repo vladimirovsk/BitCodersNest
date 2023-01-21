@@ -7,11 +7,14 @@ pipeline {
                 echo 'Building..'
                 catchError {
                     script {
-                        sh "docker build -t nest-cloud-run . "
                         sh "docker stop mongo_bitcoders"
                     }
                 }
-
+                catchError {
+                    script {
+                        sh "docker build -t nest-cloud-run . "
+                    }
+                }
             }
         }
         stage('Test') {
