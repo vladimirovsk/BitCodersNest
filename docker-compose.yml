@@ -4,7 +4,7 @@ services:
   bitcoders_nest:
     build: .
     container_name: bitcoders-nest
-    command: [ "npm", "run", "rest:dev" ]
+    command: [ "npm", "run", "rest" ]
     restart: always
     ports:
       - '9087:9087'
