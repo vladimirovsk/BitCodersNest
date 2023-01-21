@@ -1,6 +1,19 @@
 version: '3.8'
 services:
 
+  nest_bitcoders:
+    image: bitcodersnest-bitcoders_nest:latest
+    container_name: nest_bitcoders
+    command: [ "npm", "run", "rest:prod" ]
+    restart: always
+    ports:
+      - '9087:9087'
+    env_file:
+      - ./.env
+    networks:
+      - cluster_network
+    depends_on:
+      - mongo_bitcoders
 #  nest_bitcoders:
 #    build: .
 #    container_name: nest_bitcoders
