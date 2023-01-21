@@ -11,7 +11,7 @@ services:
     env_file:
       - ./.env
     networks:
-      - clusternetwork
+      - cluster_network
     depends_on:
       - mongo_bitcoders
       - redis_nest
@@ -35,7 +35,7 @@ services:
     ports:
       - "27017:27017"
     networks:
-      - clusternetwork
+      - cluster_network
 
   redis_nest:
     container_name: redis
@@ -49,8 +49,7 @@ services:
     ports:
       - '6389:6379'
     networks:
-      - clusternetwork
-
+      - cluster_network
 
   rabbitmq_nest:
     image: rabbitmq:3.9-management
@@ -59,13 +58,17 @@ services:
     env_file:
       - .env
     environment:
+      RABBITMQ_USER: ${RABBITMQ_USER}
+      RABBITMQ_HOST: ${RABBITMQ_HOST}
       RABBITMQ_DEFAULT_USER: ${RABBITMQ_USER}
       RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD}
       RABBITMQ_USERNAME: ${RABBITMQ_USER}
       RABBITMQ_PASSWORD: ${RABBITMQ_PASSWORD}
+      RABBITMQ_QUEUE: ${RABBITMQ_QUEUE}
       RABBITMQ_NODENAME: ${RABBITMQ_NODENAME}
-#      RABBITMQ_SERVER_ADDITIONAL_ERL_ARGS: -rabbit log [{console,[{level,debug}]}]
-#    command: [ "bash", "-c", "chmod 400 /var/lib/rabbitmq/.erlang.cookie; rabbitmq-server" ]
+      RABBITMQ_EXCHANGE: ${RABBITMQ_EXCHANGE}
+      RABBITMQ_SERVER_ADDITIONAL_ERL_ARGS: -rabbit log [{console,[{level,debug}]}]
+    command: [ "bash", "-c", "chmod 400 /var/lib/rabbitmq/.erlang.cookie; rabbitmq-server" ]
     volumes:
       - ./.docker/rabbitmq/data/:/var/lib/rabbitmq/
       - ./.docker/rabbitmq/logs/:/var/log/rabbitmq/
@@ -75,8 +78,8 @@ services:
       - "15671:15671"
       - "15672:15672"
     networks:
-      - clusternetwork
+      - cluster_network
 
 networks:
-  clusternetwork:
+  cluster_network:
     driver: bridge
