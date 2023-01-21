@@ -12,4 +12,4 @@ RUN npm run build
 
 #COPY /dist /dist
 
-CMD ["node", "./dist/apps/rest/main.js"]
+#CMD ["node", "./dist/apps/rest/main.js"]

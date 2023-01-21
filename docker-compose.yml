@@ -2,7 +2,7 @@ version: '3.8'
 services:
 
   nest_bitcoders:
-    image: bitcodersnest-bitcoders_nest:latest
+#    image: bitcodersnest-bitcoders_nest:latest
 #    container_name: nest_bitcoders
     build: .
     command: ["npm", "run", "rest:prod"]
