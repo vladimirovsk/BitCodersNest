@@ -7,9 +7,7 @@ pipeline {
                 echo 'Building..'
                 catchError {
                     script {
-                        sh "docker stop -f mongo_bitcoders"
-                        sh "docker stop -f mongo_bitcoders"
-
+                        sh "docker stop mongo_bitcoders"
                     }
                 }
 
