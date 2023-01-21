@@ -10,11 +10,6 @@ pipeline {
                         sh "docker stop mongo_bitcoders"
                     }
                 }
-                catchError {
-                    script {
-                        sh "docker build -t nest-cloud-run . "
-                    }
-                }
             }
         }
         stage('Test') {
