@@ -1,10 +1,10 @@
 version: '3.8'
 services:
 
-  bitcoders_nest:
+  nest_bitcoders:
     build: .
-    container_name: bitcoders-nest
-    command: [ "npm", "run", "rest" ]
+    container_name: nest_bitcoders
+    command: [ "npm", "run", "rest:prod" ]
     restart: always
     ports:
       - '9087:9087'
