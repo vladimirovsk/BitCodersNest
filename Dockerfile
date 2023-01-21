@@ -6,6 +6,6 @@ ADD package-lock.json package-lock.json
 RUN npm install
 #RUN npm ci
 ADD . .
-RUN npm run build
+#RUN npm run build
 #RUN npm prune - -production
 #CMD ["node", "./dist/main.js"]
