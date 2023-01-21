@@ -4,8 +4,6 @@ services:
   nest_bitcoders:
     image: bitcodersnest-bitcoders_nest:latest
     container_name: nest_bitcoders
-    command: [ "npm", "run", "rest:prod" ]
-    restart: always
     ports:
       - '9087:9087'
     env_file:
