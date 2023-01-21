@@ -3,7 +3,10 @@ services:
 
   nest_bitcoders:
     image: bitcodersnest-bitcoders_nest:latest
-    container_name: nest_bitcoders
+#    container_name: nest_bitcoders
+    build: .
+    command: ["npm", "run", "rest:prod"]
+    restart: always
     ports:
       - '9087:9087'
     env_file:
@@ -12,6 +15,7 @@ services:
       - cluster_network
     depends_on:
       - mongo_bitcoders
+
 #  nest_bitcoders:
 #    build: .
 #    container_name: nest_bitcoders
