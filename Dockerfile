@@ -1,4 +1,4 @@
-FROM node:16.8.0-alpine
+FROM node:14-alpine
 WORKDIR /
 ADD package.json package.json
 ADD package-lock.json package-lock.json
