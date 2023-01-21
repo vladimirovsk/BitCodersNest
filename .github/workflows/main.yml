@@ -1,8 +1,8 @@
-name: Bitcoders Front
+name: Bitcoders Back
 
 on:
   push:
-    branches: [ dev ]
+    branches: [ develop ]
   pull_request:
     branches: [ master ]
 jobs:
@@ -17,4 +17,4 @@ jobs:
           name: docker.pkg.github.com/vladimirovsk/BitCodersNest/BitCodersNest
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
-          tags: "dev"
+          tags: "develop"
