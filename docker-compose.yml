@@ -3,7 +3,7 @@ services:
 
   nest_bitcoders:
 #    image: bitcodersnest-bitcoders_nest:latest
-#    container_name: nest_bitcoders
+    container_name: nest_bitcoders
     build: .
     command: ["npm", "run", "rest:prod"]
     restart: always
