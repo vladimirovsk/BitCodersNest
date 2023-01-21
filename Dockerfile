@@ -1,15 +1,14 @@
-FROM node:16.8.0-alpine
-WORKDIR /
-ADD package.json package.json
-ADD package-lock.json package-lock.json
+FROM node:16.8.0-alpine As build
 
-RUN npm install
-#RUN npm ci
-ADD . .
-RUN npm cache clean --force
-RUN npm install
+WORKDIR /usr/src/app
 
-RUN npm prune --production
-#RUN npm run build
+COPY package*.json ./
+
+RUN npm ci --only=production && npm cache clean --force
+#RUN npm install --legacy-peer-deps
+
+COPY  . .
+
+RUN npm run build
 
 #CMD ["node", "./dist/apps/rest/main.js"]
