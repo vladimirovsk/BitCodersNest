@@ -7,7 +7,7 @@
   "license": "UNLICENSED",
   "scripts": {
     "prebuild": "rimraf dist",
-    "build": "nest build rest && nest build serv",
+    "build": "nest build rest",
     "rest": "nest start rest",
     "serv": "nest start services",
     "sock": "nest start websocket",
@@ -52,14 +52,15 @@
     "passport-jwt": "^4.0.1",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.8.0",
-    "typegoose": "^5.9.1",
     "ts-jest": "^29.0.5",
     "ts-loader": "^9.2.3",
     "ts-node": "^10.0.0",
-    "tsconfig-paths": "^4.1.2"
+    "tsconfig-paths": "^4.1.2",
+    "typegoose": "^5.9.1"
   },
   "devDependencies": {
     "@types/jest": "^29.2.6",
+    "@types/passport-jwt": "^3.0.8",
     "@types/supertest": "^2.0.11",
     "@typescript-eslint/eslint-plugin": "^5.0.0",
     "@typescript-eslint/parser": "^5.0.0",
