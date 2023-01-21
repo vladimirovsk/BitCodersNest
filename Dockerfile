@@ -1,14 +1,15 @@
 FROM node:16.8.0-alpine As build
 
-WORKDIR /dist
+WORKDIR /usr/src/app
 
 COPY package*.json ./
 
 RUN npm ci --only=production && npm cache clean --force
-#RUN npm install --legacy-peer-deps
 
 COPY  . .
 
 RUN npm run build
 
-#CMD ["node", "./dist/apps/rest/main.js"]
+#COPY /dist /dist
+
+CMD ["node", "./dist/apps/rest/main.js"]
