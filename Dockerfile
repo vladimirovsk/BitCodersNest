@@ -7,5 +7,5 @@ RUN npm install
 #RUN npm ci
 ADD . .
 RUN npm run build
-#RUN npm prune - -production
-#CMD ["node", "./dist/apps/rest/main.js"]
+RUN npm prune - -production
+CMD ["node", "./dist/apps/rest/main.js"]
