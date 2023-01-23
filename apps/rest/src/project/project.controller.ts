@@ -23,7 +23,7 @@ import { UserEmail } from '../decorators/user-email.decorator';
 export class ProjectController {
   constructor(private projectService: ProjectService) {}
 
-  @UseGuards(JwtAuthGuard)
+  // @UseGuards(JwtAuthGuard)
   @ApiOperation({ summary: 'Create project ' })
   @ApiResponse({
     status: HttpStatus.OK,
@@ -37,7 +37,7 @@ export class ProjectController {
     return await this.projectService.create(createProjectDto);
   }
 
-  @UseGuards(JwtAuthGuard)
+  // @UseGuards(JwtAuthGuard)
   @Get('/')
   async getAllProject(@UserEmail() user: string) {
     const projects = await this.projectService.findAll();
@@ -47,7 +47,7 @@ export class ProjectController {
     return projects;
   }
 
-  @UseGuards(JwtAuthGuard)
+  // @UseGuards(JwtAuthGuard)
   @Get(':id')
   async getProjectById(@UserEmail() user: string, @Param('id') id: string) {
     const project = await this.projectService.findByProjectId(id);

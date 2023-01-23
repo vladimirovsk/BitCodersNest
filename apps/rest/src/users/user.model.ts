@@ -1,19 +1,22 @@
-import { prop } from '@typegoose/typegoose';
-import { TimeStamps, Base } from '@typegoose/typegoose/lib/defaultClasses';
+import { Prop, SchemaFactory } from '@nestjs/mongoose';
+import { Document } from 'mongoose';
 
-export interface UserModel extends Base {}
-export class UserModel extends TimeStamps{
+export type UserModelDocument = UserModel & Document;
+export class UserModel {
+  @Prop()
+  id: string;
 
-  @prop({unique:true})
+  @Prop({ unique: true })
   email: string;
 
-  @prop()
+  @Prop()
   password: string;
 
+  @Prop()
+  token: string;
 
-  @prop()
-  token:string;
-
-  @prop({default: false})
+  @Prop({ default: false })
   isRegisteredWithGoogle: boolean;
 }
+
+export const UserModelSchema = SchemaFactory.createForClass(UserModel);
