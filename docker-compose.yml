@@ -1,6 +1,7 @@
 version: '3.8'
 services:
-
+  #bb62ecf42c579c17ff32b17f1e70f80d1e147676
+  #1d2d7b9a2bb978141b63e19ced6a5de557c1917f
   nest_bitcoders:
 #    image: bitcodersnest-bitcoders_nest:latest
     container_name: nest_bitcoders
