@@ -6,7 +6,7 @@ import { UserEmail } from '../decorators/user-email.decorator';
 import { CreateUserDto } from '../users/dto/user-create.dto';
 import { AccountLogin } from '../../../../libs/contracts';
 
-@ApiTags('auth')
+@ApiTags('Auth')
 @Controller('auth')
 export class AuthController {
   constructor(
