@@ -18,7 +18,7 @@ import { Project } from './project.model';
 import { JwtAuthGuard } from '../auth/guards/jwt.guard';
 import { UserEmail } from '../decorators/user-email.decorator';
 
-@ApiTags('project')
+@ApiTags('Project')
 @Controller('project')
 export class ProjectController {
   constructor(private projectService: ProjectService) {}
@@ -38,6 +38,11 @@ export class ProjectController {
   }
 
   // @UseGuards(JwtAuthGuard)
+  @ApiOperation({ summary: 'Get all project' })
+  @ApiResponse({
+    status: HttpStatus.OK,
+    description: 'Returned is OK',
+  })
   @Get('/')
   async getAllProject(@UserEmail() user: string) {
     const project = await this.projectService.findAll();
@@ -48,6 +53,11 @@ export class ProjectController {
   }
 
   // @UseGuards(JwtAuthGuard)
+  @ApiOperation({ summary: 'Get project by id' })
+  @ApiResponse({
+    status: HttpStatus.OK,
+    description: 'Returned is OK',
+  })
   @Get(':id')
   async getProjectById(@UserEmail() user: string, @Param('id') id: string) {
     const project = await this.projectService.findByProjectId(id);
@@ -57,7 +67,14 @@ export class ProjectController {
     return project;
   }
 
-  // @UseGuards(JwtAuthGuard)
-  // @Delete()
-  // async deleteProject() {}
+  @ApiOperation({ summary: 'Delete project by id' })
+  @ApiResponse({
+    status: HttpStatus.OK,
+    description: 'Returned is OK',
+  })
+  @UseGuards(JwtAuthGuard)
+  @Delete()
+  async deleteProject() {
+    return { error: 'developing...'};
+  }
 }
