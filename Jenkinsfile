@@ -7,7 +7,7 @@ pipeline {
                 echo 'Building..'
                 catchError {
                     script {
-                        sh "docker stop mongo_bitcoders"
+                        echo 'Stop mongo..'
                     }
                 }
             }
@@ -22,7 +22,8 @@ pipeline {
                 echo 'Deploying....'
                 catchError {
                     script {
-                        sh "docker-compose up -d"
+                        sh "sudo chmod 755 -R . /var/lib/jenkins/workspace/BitCodersNest/.docker/"
+                        sh "docker-compose up -d --build"
                     }
                 }
             }

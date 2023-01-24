@@ -1,11 +1,8 @@
 import { Module } from '@nestjs/common';
 
 @Module({
-  imports:[],
-  providers:[],
-  controllers:[]
+  imports: [],
+  providers: [],
+  controllers: [],
 })
-
-export class GoogleAuthModule {
-
-}
+export class GoogleAuthModule {}

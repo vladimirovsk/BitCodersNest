@@ -1,36 +1,47 @@
-import { TypegooseModule } from 'nestjs-typegoose';
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import * as Joi from '@hapi/joi';
 import { LoggerMiddleware } from './middleware/logger.middleware';
 import { ProjectModule } from './project/project.module';
-import { getMongoConfig } from '../../../configs/mongo.config';
+import { MongooseModule } from '@nestjs/mongoose';
 import { AuthModule } from './auth/auth.module';
 import { UserModule } from './users/user.module';
-import { RMQModule } from 'nestjs-rmq';
-import { getRMQConfig } from '../../../configs/rmq.config';
+// import { RMQModule } from 'nestjs-rmq';
+// import { getRMQConfig } from '../../../configs/rmq.config';
 import { AppService } from './app.service';
+import { getMongoString } from '../../../configs/mongo.config';
 
-const environment = process.env.NODE_ENV || 'develop';
+const configService = new ConfigService();
 
 @Module({
   imports: [
-    TypegooseModule.forRootAsync({
+    ConfigModule.forRoot({
+      // validationSchema: Joi.object({
+      //   GOOGLE_AUTH_CLIENT_ID: Joi.string().required(),
+      //   GOOGLE_AUTH_CLIENT_SECRET: Joi.string().required(),
+      // }),
+      //envFilePath: `.env.${environment}`,
+      // envFilePath: '.env', //`.env.${environment}`,
+      isGlobal: true,
+    }),
+
+    // MongooseModule.forRoot(getMongoString(configService), {
+    //   dbName: 'admin',
+    //   user: 'root',
+    //   pass: 'tHD56lRBqBnTOcv6',
+    //   // useNewUrlParser: true,
+    //   // useUnifiedTopology: true,
+    // }),
+    MongooseModule.forRootAsync({
+      imports: [ConfigModule],
+      useFactory: async (configService: ConfigService) => ({
+        uri: getMongoString(configService),
+      }),
       inject: [ConfigService],
-      useFactory: getMongoConfig,
     }),
     ProjectModule,
     UserModule,
     AuthModule,
-    ConfigModule.forRoot({
-      validationSchema: Joi.object({
-        GOOGLE_AUTH_CLIENT_ID: Joi.string().required(),
-        GOOGLE_AUTH_CLIENT_SECRET: Joi.string().required(),
-      }),
-      //       envFilePath: `.env.${environment}`,
-      envFilePath: '.env', //`.env.${environment}`,
-      isGlobal: true,
-    }),
+
     //TODO not working in docker
     //RMQModule.forRootAsync(getRMQConfig()),
   ],
