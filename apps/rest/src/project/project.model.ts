@@ -1,17 +1,22 @@
-import { prop } from '@typegoose/typegoose';
-import { Base } from '@typegoose/typegoose/lib/defaultClasses';
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { Document } from 'mongoose';
 
-export interface ProjectModel extends Base {}
-export class ProjectModel {
-	@prop()
+export type ProjectDocument = Project & Document;
+@Schema({
+  collection: 'project',
+})
+export class Project {
+  @Prop({ type: String })
   title: string;
 
-  @prop()
+  @Prop({ type: String })
   ico: string;
 
-  @prop()
+  @Prop({ type: String })
   img: string;
 
-  @prop()
+  @Prop({ type: String })
   note: string;
 }
+
+export const ProjectSchema = SchemaFactory.createForClass(Project);
