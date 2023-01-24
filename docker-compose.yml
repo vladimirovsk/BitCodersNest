@@ -1,8 +1,21 @@
 version: '3.6'
 services:
 
-  nest_bitcoders:
-    container_name: nest_bitcoders
+  websocket_bitcoders:
+    container_name: websocket_bitcoders
+    build:
+      context: .
+    command: [ "npm", "run", "sock:prod" ]
+    restart: always
+    env_file:
+      - .env.docker
+    ports:
+      - '8000:8000'
+    networks:
+      - bitcoders
+
+  rest_bitcoders:
+    container_name: rest_bitcoders
     build:
       context: .
     command: ["npm", "run", "rest:prod"]
