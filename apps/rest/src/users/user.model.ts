@@ -1,8 +1,9 @@
-import { Prop, SchemaFactory } from '@nestjs/mongoose';
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
 
-export type UserModelDocument = UserModel & Document;
-export class UserModel {
+export type UserDocument = User & Document;
+@Schema({ collection: 'user' })
+export class User {
   @Prop()
   id: string;
 
@@ -19,4 +20,4 @@ export class UserModel {
   isRegisteredWithGoogle: boolean;
 }
 
-export const UserModelSchema = SchemaFactory.createForClass(UserModel);
+export const UserSchema = SchemaFactory.createForClass(User);

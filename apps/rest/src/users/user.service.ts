@@ -1,5 +1,5 @@
 import { HttpException, HttpStatus, Injectable, Logger } from '@nestjs/common';
-import { UserModel } from './user.model';
+import { User } from './user.model';
 import { genSalt, hash } from 'bcryptjs';
 import { CreateUserDto } from './dto/user-create.dto';
 import { Model } from 'mongoose';
@@ -10,11 +10,11 @@ export class UserService {
   private logger = new Logger(UserService.name);
 
   constructor(
-    @InjectModel(UserModel.name)
-    private readonly userModel: Model<UserModel>,
+    @InjectModel(User.name)
+    private readonly userModel: Model<User>,
   ) {}
 
-  async getByEmail(email: string): Promise<UserModel | null> {
+  async getByEmail(email: string): Promise<User | null> {
     const user = await this.userModel.findOne({ email });
     if (!user) {
       {

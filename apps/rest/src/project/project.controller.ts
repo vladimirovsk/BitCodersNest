@@ -14,7 +14,7 @@ import {
 import { ProjectService } from './project.service';
 import { CreateProjectDto } from './dto/create-project.dto';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { ProjectModel } from './project.model';
+import { Project } from './project.model';
 import { JwtAuthGuard } from '../auth/guards/jwt.guard';
 import { UserEmail } from '../decorators/user-email.decorator';
 
@@ -23,7 +23,7 @@ import { UserEmail } from '../decorators/user-email.decorator';
 export class ProjectController {
   constructor(private projectService: ProjectService) {}
 
-  // @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard)
   @ApiOperation({ summary: 'Create project ' })
   @ApiResponse({
     status: HttpStatus.OK,
@@ -33,18 +33,18 @@ export class ProjectController {
   @Post('create')
   async createProject(
     @Body() createProjectDto: CreateProjectDto,
-  ): Promise<ProjectModel> {
+  ): Promise<Project> {
     return await this.projectService.create(createProjectDto);
   }
 
   // @UseGuards(JwtAuthGuard)
   @Get('/')
   async getAllProject(@UserEmail() user: string) {
-    const projects = await this.projectService.findAll();
-    if (!projects) {
+    const project = await this.projectService.findAll();
+    if (!project) {
       throw new HttpException('Projects not found', HttpStatus.NOT_FOUND);
     }
-    return projects;
+    return project;
   }
 
   // @UseGuards(JwtAuthGuard)
@@ -57,6 +57,7 @@ export class ProjectController {
     return project;
   }
 
+  // @UseGuards(JwtAuthGuard)
   // @Delete()
   // async deleteProject() {}
 }

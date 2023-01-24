@@ -4,6 +4,7 @@ import { NestExpressApplication } from '@nestjs/platform-express';
 import { ValidationPipe, Logger } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { getMongoString } from '../../../configs/mongo.config';
 
 async function bootstrap() {
   const logger = new Logger('MAIN');
@@ -12,23 +13,19 @@ async function bootstrap() {
     cors: true,
   });
 
-  const workDir = process.cwd();
+  //const workDir = process.cwd();
+  //const environment = process.env.NODE_ENV || 'develop';
+
   const configService = app.get(ConfigService);
 
-  const environment = process.env.NODE_ENV || 'develop';
   ConfigModule.forRoot({
     // envFilePath: `.env.${environment}`,
-    envFilePath: '.env',
+    // envFilePath: '.env',
     isGlobal: true,
   });
 
-  logger.debug(
-    `mongodb://${configService.get('MONGO_USER')}:${configService.get(
-      'MONGO_PASSWORD',
-    )}@${configService.get('MONGO_HOST')}:${configService.get(
-      'MONGO_PORT',
-    )}/${configService.get('MONGO_DB')}`,
-  );
+  logger.debug(`USE MONGO_HOST: ${configService.get('MONGO_HOST')}`);
+
   app.enableCors();
   app.useGlobalPipes(new ValidationPipe());
   app.setGlobalPrefix(`/api/${configService.get('VERSION') ?? 'v1'}`);

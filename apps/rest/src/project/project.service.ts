@@ -22,20 +22,7 @@ export class ProjectService {
     return await this.projectModel.findById(id).exec();
   }
 
-  async findAll() {
-    //Promise<ProjectModel[]>
-    const strConfig = `mongodb://${this.configService.get(
-      'MONGO_USER',
-    )}:${this.configService.get('MONGO_PASSWORD')}@${this.configService.get(
-      'MONGO_HOST',
-    )}:${this.configService.get('MONGO_PORT')}/${this.configService.get(
-      'MONGO_DB',
-    )}`;
-
-    const result = await this.projectModel.find().exec();
-    return {
-      strConfig,
-      result,
-    };
+  async findAll(): Promise<Project[]> {
+    return await this.projectModel.find().exec();
   }
 }

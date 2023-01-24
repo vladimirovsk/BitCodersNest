@@ -7,7 +7,7 @@ import { ConfigService } from '@nestjs/config';
 import { google, Auth } from 'googleapis';
 import { UserService } from '../users/user.service';
 import { ERROR_BAD_TOKEN_INFO } from './google-auth.constant';
-import { UserModel } from '../users/user.model';
+import { User } from '../users/user.model';
 import { AuthService } from './auth-service/auth-service';
 
 @Injectable()
@@ -24,7 +24,7 @@ export class GoogleAuthService {
     this.oauthClient = new google.auth.OAuth2(clientID, clientSecret);
   }
 
-  async getCookiesForUser(user: UserModel) {
+  async getCookiesForUser(user: User) {
     const accessTokenCookie = this.authService.getCookieWithJwtAccessToken(
       user.id,
     );
@@ -39,7 +39,7 @@ export class GoogleAuthService {
     };
   }
 
-  async handleRegisteredUser(user: UserModel) {
+  async handleRegisteredUser(user: User) {
     if (!user.isRegisteredWithGoogle) {
       throw new UnauthorizedException();
     }
