@@ -1,6 +1,7 @@
 # compiled output
 .docker
-.env*
+.env
+.env.docker
 
 /dist
 /node_modules
