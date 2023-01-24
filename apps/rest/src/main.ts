@@ -34,7 +34,7 @@ async function bootstrap() {
     .setTitle('REST BITCODERS')
     .setDescription('The rest API description')
     .setVersion('0.2')
-    .addTag('rate')
+    .addTag('Auth')
     .build();
 
   const document = SwaggerModule.createDocument(app, configDocument);
