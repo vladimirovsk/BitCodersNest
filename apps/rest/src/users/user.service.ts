@@ -14,8 +14,12 @@ export class UserService {
     private readonly userModel: Model<User>,
   ) {}
 
-  async getByEmail(email: string): Promise<User | null> {
-    const user = await this.userModel.findOne({ email });
+  async getByEmailOneUser(email: string): Promise<User | null> {
+    return this.userModel.findOne({ email });
+  }
+
+  async getByEmail(email: string): Promise<User[] | null> {
+    const user = await this.userModel.find({ email });
     if (!user) {
       {
         throw new HttpException('User not found', HttpStatus.NOT_FOUND);

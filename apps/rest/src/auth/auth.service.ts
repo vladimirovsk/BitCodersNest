@@ -18,7 +18,7 @@ export class AuthService {
     email: string,
     password: string,
   ): Promise<Pick<User, 'email'>> {
-    const user = await this.userService.getByEmail(email);
+    const user = await this.userService.getByEmailOneUser(email);
     if (!user) {
       throw new UnauthorizedException(USER_NOT_FOUND_ERROR);
     }
@@ -36,6 +36,10 @@ export class AuthService {
     return {
       access_token: await this.jwtService.signAsync(payload),
     };
+  }
+
+  async findOneUser(email: string) {
+    return this.userService.getByEmailOneUser(email);
   }
 
   async findUser(email: string) {
