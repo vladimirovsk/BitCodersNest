@@ -7,15 +7,14 @@ export class UpdateUserDto {
   _id?: string;
 
   @IsString()
-  login?:string;
+  login?: string;
 
   @IsString()
   password?: string;
 
   @IsString()
-  token?:string;
+  token?: string;
 
   @IsBoolean()
-  isRegisteredWithGoogle?: boolean
-
+  isRegisteredWithGoogle?: boolean;
 }

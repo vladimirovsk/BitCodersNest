@@ -20,17 +20,9 @@ const configService = new ConfigService();
       //   GOOGLE_AUTH_CLIENT_SECRET: Joi.string().required(),
       // }),
       //envFilePath: `.env.${environment}`,
-      // envFilePath: '.env', //`.env.${environment}`,
+      //envFilePath: '.env', //`.env.${environment}`,
       isGlobal: true,
     }),
-
-    // MongooseModule.forRoot(getMongoString(configService), {
-    //   dbName: 'admin',
-    //   user: 'root',
-    //   pass: 'tHD56lRBqBnTOcv6',
-    //   // useNewUrlParser: true,
-    //   // useUnifiedTopology: true,
-    // }),
     MongooseModule.forRootAsync({
       imports: [ConfigModule],
       useFactory: async (configService: ConfigService) => ({
@@ -41,7 +33,6 @@ const configService = new ConfigService();
     ProjectModule,
     UserModule,
     AuthModule,
-
     //TODO not working in docker
     //RMQModule.forRootAsync(getRMQConfig()),
   ],

@@ -14,12 +14,42 @@ export class UserService {
     private readonly userModel: Model<User>,
   ) {}
 
+  async getByEmailOneUserWithPassword(email: string): Promise<User | null> {
+    return this.userModel
+      .findOne(
+        { email },
+        {
+          _id: false,
+          email: true,
+          isRegisteredWithGoogle: true,
+          password: true,
+        },
+      )
+      .lean();
+  }
+
   async getByEmailOneUser(email: string): Promise<User | null> {
-    return this.userModel.findOne({ email });
+    return this.userModel
+      .findOne(
+        { email },
+        {
+          _id: false,
+          email: true,
+          isRegisteredWithGoogle: true,
+        },
+      )
+      .lean();
   }
 
   async getByEmail(email: string): Promise<User[] | null> {
-    const user = await this.userModel.find({ email });
+    const user = await this.userModel.find(
+      { email },
+      {
+        _id: true,
+        email: true,
+        isRegisteredWithGoogle: true,
+      },
+    );
     if (!user) {
       {
         throw new HttpException('User not found', HttpStatus.NOT_FOUND);
@@ -42,6 +72,12 @@ export class UserService {
       email: dto.login,
       password: await hash(dto.password, salt),
     });
-    return await createUser.save();
+
+    await createUser.save();
+
+    return {
+      email: createUser.email,
+      isRegisteredWithGoogle: createUser.isRegisteredWithGoogle,
+    };
   }
 }
