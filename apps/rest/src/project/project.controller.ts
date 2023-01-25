@@ -13,7 +13,7 @@ import {
 } from '@nestjs/common';
 import { ProjectService } from './project.service';
 import { CreateProjectDto } from './dto/create-project.dto';
-import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger";
 import { Project } from './project.model';
 import { JwtAuthGuard } from '../auth/guards/jwt.guard';
 import { UserEmail } from '../decorators/user-email.decorator';
@@ -24,6 +24,7 @@ export class ProjectController {
   constructor(private projectService: ProjectService) {}
 
   @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth()
   @ApiOperation({ summary: 'Create project ' })
   @ApiResponse({
     status: HttpStatus.OK,
@@ -72,6 +73,7 @@ export class ProjectController {
     status: HttpStatus.OK,
     description: 'Returned is OK',
   })
+  @ApiBearerAuth()
   @UseGuards(JwtAuthGuard)
   @Delete()
   async deleteProject() {
