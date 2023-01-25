@@ -10,8 +10,14 @@ import {
 import { UpdateUserDto } from './dto/user-update.dto';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/user-create.dto';
-import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import {
+  ApiBearerAuth,
+  ApiOperation,
+  ApiResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 import { JwtAuthGuard } from '../auth/guards/jwt.guard';
+import { UserSelectDto } from './dto/user-select.dto';
 
 @ApiTags('User')
 @Controller('user')
@@ -19,17 +25,20 @@ export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth()
   @ApiOperation({ summary: 'Get all user' })
   @ApiResponse({
     status: HttpStatus.OK,
     description: 'Returned is OK',
+    type: UserSelectDto,
   })
   @Get('/')
   async userInfo() {
-    return { user: 'userInfo' };
+    return this.userService
   }
 
   @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth()
   @ApiOperation({ summary: 'Create user' })
   @ApiResponse({
     status: HttpStatus.OK,
@@ -41,6 +50,7 @@ export class UserController {
   }
 
   @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth()
   @ApiOperation({ summary: 'Modify user' })
   @ApiResponse({
     status: HttpStatus.OK,

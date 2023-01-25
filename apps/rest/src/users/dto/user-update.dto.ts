@@ -18,5 +18,4 @@ export class UpdateUserDto {
   @IsBoolean()
   isRegisteredWithGoogle?: boolean
 
-
 }

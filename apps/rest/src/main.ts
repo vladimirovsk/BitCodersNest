@@ -31,6 +31,7 @@ async function bootstrap() {
   app.setGlobalPrefix(`/api/${configService.get('VERSION') ?? 'v1'}`);
 
   const configDocument = new DocumentBuilder()
+    .addBearerAuth()
     .setTitle('REST BITCODERS')
     .setDescription('The rest API description')
     .setVersion('0.2')
