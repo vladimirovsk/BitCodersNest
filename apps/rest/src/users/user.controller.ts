@@ -1,12 +1,12 @@
 import {
   Body,
   Controller,
-  Get,
+  Get, HttpCode,
   HttpStatus,
   Post,
   Put,
-  UseGuards,
-} from '@nestjs/common';
+  UseGuards
+} from "@nestjs/common";
 import { UpdateUserDto } from './dto/user-update.dto';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/user-create.dto';
@@ -26,24 +26,12 @@ export class UserController {
 
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
-  @ApiOperation({ summary: 'Get all user' })
-  @ApiResponse({
-    status: HttpStatus.OK,
-    description: 'Returned is OK',
-    type: UserSelectDto,
-  })
-  @Get('/')
-  async userInfo() {
-    return this.userService
-  }
-
-  @UseGuards(JwtAuthGuard)
-  @ApiBearerAuth()
   @ApiOperation({ summary: 'Create user' })
   @ApiResponse({
     status: HttpStatus.OK,
     description: 'Returned is OK',
   })
+  @HttpCode(HttpStatus.OK)
   @Post()
   async insertUser(@Body() dto: CreateUserDto) {
     return dto;
@@ -56,6 +44,7 @@ export class UserController {
     status: HttpStatus.OK,
     description: 'Returned is OK',
   })
+  @HttpCode(HttpStatus.OK)
   @Put()
   async updateUser(@Body() dto: UpdateUserDto) {
     return dto;

@@ -18,7 +18,7 @@ export class AuthService {
     email: string,
     password: string,
   ): Promise<Pick<User, 'email'>> {
-    const user = await this.userService.getByEmailOneUser(email);
+    const user = await this.userService.getByEmailOneUserWithPassword(email);
     if (!user) {
       throw new UnauthorizedException(USER_NOT_FOUND_ERROR);
     }

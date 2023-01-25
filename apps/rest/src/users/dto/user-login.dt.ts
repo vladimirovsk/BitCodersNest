@@ -1,15 +1,12 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsBoolean, IsEmail } from 'class-validator';
 
-export class UserSelectDto {
-  @ApiProperty({ default: 'Test User' })
-  login?: string;
-
+export class UserLoginDto {
   @ApiProperty({ default: 'test.email@test.com' })
   @IsEmail()
-  email?: string;
+  email: string;
 
-  @ApiProperty({ default: false })
+  @ApiProperty({ default: 'you_password' })
   @IsBoolean()
-  isRegisteredWithGoogle?: boolean;
+  password: boolean;
 }
