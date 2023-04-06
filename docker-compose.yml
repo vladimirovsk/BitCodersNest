@@ -49,6 +49,31 @@ services:
     networks:
         - bitcoders
 
+  rabbitmq_bitcoders:
+    image: rabbitmq:3.9-management
+    container_name: rabbitmq
+    restart: always
+    env_file:
+      - .env
+    environment:
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_USER}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD}
+      RABBITMQ_USERNAME: ${RABBITMQ_USER}
+      RABBITMQ_PASSWORD: ${RABBITMQ_PASSWORD}
+      RABBITMQ_NODENAME: ${RABBITMQ_NODENAME}
+    # RABBITMQ_SERVER_ADDITIONAL_ERL_ARGS: -rabbit log [{console,[{level,debug}]}]
+    # command: [ "bash", "-c", "chmod 400 /var/lib/rabbitmq/.erlang.cookie; rabbitmq-server" ]
+    volumes:
+      - ./.docker/rabbitmq/data/:/var/lib/rabbitmq/
+      - ./.docker/rabbitmq/logs/:/var/log/rabbitmq/
+    ports:
+      - "5671:5671"
+      - "5672:5672"
+      - "15671:15671"
+      - "15672:15672"
+    networks:
+      - bitcoders
+
 networks:
   bitcoders:
     driver: bridge

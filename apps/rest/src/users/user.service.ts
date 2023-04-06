@@ -4,6 +4,7 @@ import { genSalt, hash } from 'bcryptjs';
 import { CreateUserDto } from './dto/user-create.dto';
 import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
+import { Cron } from "@nestjs/schedule";
 
 @Injectable()
 export class UserService {
@@ -12,6 +13,8 @@ export class UserService {
   constructor(
     @InjectModel(User.name)
     private readonly userModel: Model<User>,
+
+    // private stripeService: StripeService
   ) {}
 
   async getByEmailOneUserWithPassword(email: string): Promise<User | null> {
@@ -28,7 +31,7 @@ export class UserService {
       .lean();
   }
 
-  async getByEmailOneUser(email: string): Promise<User | null> {
+  async getByEmailOneUser(email: string): Promise<User> {
     return this.userModel
       .findOne(
         { email },
@@ -41,7 +44,7 @@ export class UserService {
       .lean();
   }
 
-  async getByEmail(email: string): Promise<User[] | null> {
+  async getByEmail(email: string): Promise<User[] > {
     const user = await this.userModel.find(
       { email },
       {
@@ -79,5 +82,18 @@ export class UserService {
       email: createUser.email,
       isRegisteredWithGoogle: createUser.isRegisteredWithGoogle,
     };
+  }
+
+  async createWithGoogle(email: string, name: string) {
+    //const stripeCustomer = await this.stripeService.createCustomer(name, email);
+
+    const newUser = await this.userModel.create({
+      email,
+      name,
+      isRegisteredWithGoogle: true,
+      //stripeCustomerId: stripeCustomer.id
+    });
+    await newUser.save();
+    return newUser;
   }
 }

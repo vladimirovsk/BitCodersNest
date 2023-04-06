@@ -56,7 +56,7 @@ export class WebsocketService implements OnModuleInit {
       const contract = { block_last: 1000 };
 
       currentData.rate = String(
-        this.getRandom(1600000000000000000000000, 2300000000000000000000000),
+        this.getRandom(16000, 23000),
       );
 
       const token = this.tokens.find(

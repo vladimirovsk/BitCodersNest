@@ -4,10 +4,10 @@ import { ConfigService } from '@nestjs/config';
 @Injectable()
 export class AppService implements OnModuleInit {
   private logger = new Logger(AppService.name);
-
-  constructor(private readonly configService: ConfigService) {}
-
+  constructor(
+    private readonly configService: ConfigService
+  ) {}
   onModuleInit() {
-    this.logger.log('APP SERVICE STARTING');
+    this.logger.log('REST SERVICE STARTING');
   }
 }

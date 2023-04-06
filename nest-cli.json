@@ -34,6 +34,15 @@
       "compilerOptions": {
         "tsConfigPath": "apps/websocket/tsconfig.app.json"
       }
+    },
+    "discord-bot": {
+      "type": "application",
+      "root": "apps/discord-bot",
+      "entryFile": "main",
+      "sourceRoot": "apps/discord-bot/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/discord-bot/tsconfig.app.json"
+      }
     }
   }
 }

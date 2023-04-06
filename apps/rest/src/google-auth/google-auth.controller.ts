@@ -14,19 +14,21 @@ import { Request } from 'express';
 @UseInterceptors(ClassSerializerInterceptor)
 export class GoogleAuthController {
   constructor(
-    private readonly googleAuthService: GoogleAuthService
+     private readonly googleAuthService: GoogleAuthService
   ) {
   }
 
   @Post()
   async authenticate(@Body() tokenData: TokenVerificationDto, @Req() request: Request) {
-    // const {
-    //   accessTokenCookie,
-    //   refreshTokenCookie,
-    // } = await this.googleAuthService.authenticate(tokenData.token);
+       const {
+         accessTokenCookie,
+         refreshTokenCookie,
+         user,
+       } = await this.googleAuthService.authenticate(tokenData.token);
+    if (request.res!= undefined) {
+      request.res.setHeader('Set-Cookie', [accessTokenCookie, refreshTokenCookie]);
+    }
 
-    //request.res.setHeader('Set-Cookie', [accessTokenCookie, refreshTokenCookie]);
-
-    // return user;
+    return user;
   }
 }
