@@ -1,18 +1,14 @@
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { ProjectModule } from './project/project.module';
-import { AuthModule } from './auth/auth.module';
-import { UserModule } from './users/user.module';
 import { AppService } from './app.service';
 import { getMongoString } from '../../../configs/mongo.config';
-import { getRMQConfig } from '../../../configs/rmq.config';
-import { AppLoggerModule } from '../../../middleware/app-logger/app-logger.module';
+import { AppLoggerModule } from '@Middleware/app-logger/app-logger.module';
 import * as Joi from '@hapi/joi';
-import { RMQModule } from 'nestjs-rmq';
 import { MongooseModule } from '@nestjs/mongoose';
-import { ScheduleModule } from '@nestjs/schedule';
-import { LoggerMiddleware } from '../../../middleware/logger.middleware';
-import { GoogleAuthModule } from './google-auth/google-auth.module';
+import { LoggerMiddleware } from '@Middleware/logger.middleware';
+import { RMQModule } from 'nestjs-rmq';
+import { getRMQConfig } from '@Configs/rmq.config';
+// import { AppLoggerService } from '@Middleware/app-logger/app-logger.service';
 
 const configService = new ConfigService();
 
@@ -20,13 +16,17 @@ const configService = new ConfigService();
   imports: [
     AppLoggerModule,
     ConfigModule.forRoot({
+      envFilePath: '.env', //`.env.${environment}`,
+      isGlobal: true,
+    }),
+    ConfigModule.forRoot({
       validationSchema: Joi.object({
         GOOGLE_AUTH_CLIENT_ID: Joi.string().required(),
-        GOOGLE_AUTH_CLIENT_SECRET: Joi.string().required()
+        GOOGLE_AUTH_CLIENT_SECRET: Joi.string().required(),
       }),
-        // envFilePath: `.env.${environment}`,
-        envFilePath: '.env', //`.env.${environment}`,
-        isGlobal: true,
+      //envFilePath: `.env.${environment}`,
+      envFilePath: '.env',
+      isGlobal: true,
     }),
     RMQModule.forRootAsync(getRMQConfig()),
     MongooseModule.forRootAsync({
@@ -36,11 +36,11 @@ const configService = new ConfigService();
       }),
       inject: [ConfigService],
     }),
-    ScheduleModule.forRoot(),
-    ProjectModule,
-    UserModule,
-    AuthModule,
-    GoogleAuthModule,
+    // // ScheduleModule.forRoot(),
+    // ProjectModule,
+    // UserModule,
+    // AuthModule,
+    // GoogleAuthModule,
   ],
   providers: [AppService],
 })

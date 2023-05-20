@@ -11,7 +11,3 @@ COPY  . .
 RUN npm run build
 
 EXPOSE 27017
-
-#COPY /dist /dist
-
-#CMD ["node", "./dist/apps/rest/main.js"]

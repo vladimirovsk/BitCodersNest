@@ -11,7 +11,6 @@
     "rest": "nest start rest",
     "serv": "nest start services",
     "sock": "nest start websocket",
-    "bot:dev": "nest start discord-bot --watch",
     "rest:dev": "nest start rest --watch",
     "sock:dev": "nest start websocket --watch",
     "serv:dev": "nest start services --watch",
@@ -28,6 +27,8 @@
     "test:e2e": "jest --config apps/rest/test/jest-e2e.json"
   },
   "dependencies": {
+    "@discord-nestjs/common": "^5.2.4",
+    "@discord-nestjs/core": "^5.3.6",
     "@google-cloud/local-auth": "^2.1.0",
     "@hapi/joi": "^17.1.1",
     "@nestjs/cli": "^9.3.0",
@@ -51,10 +52,12 @@
     "bcryptjs": "^2.4.3",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.0",
+    "discord.js": "^14.11.0",
     "google-spreadsheet": "^3.3.0",
     "googleapis": "^111.0.0",
     "mongoose": "^6.10.0",
     "nest-google-sheet-connector": "^2.0.0",
+    "nestjs-dynamic-providers": "^0.1.9",
     "nestjs-rmq": "^2.8.0",
     "passport": "^0.6.0",
     "passport-jwt": "^4.0.1",
@@ -63,8 +66,7 @@
     "ts-jest": "^29.0.5",
     "ts-loader": "^9.2.3",
     "ts-node": "^10.0.0",
-    "tsconfig-paths": "^4.1.2",
-    "yarn": "^1.22.19"
+    "tsconfig-paths": "^4.1.2"
   },
   "devDependencies": {
     "@types/jest": "^29.4.0",

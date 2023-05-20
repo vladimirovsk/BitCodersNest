@@ -3,7 +3,7 @@
   "sourceRoot": "apps/rest/src",
   "compilerOptions": {
     "tsConfigPath": "apps/rest/tsconfig.app.json",
-    "webpack": true
+    "webpack": false
   },
   "monorepo": true,
   "root": "apps/rest",

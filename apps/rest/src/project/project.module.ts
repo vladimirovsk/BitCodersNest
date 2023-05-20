@@ -3,6 +3,7 @@ import { Project, ProjectSchema } from './project.model';
 import { ProjectService } from './project.service';
 import { ProjectController } from './project.controller';
 import { MongooseModule } from '@nestjs/mongoose';
+import { GoogleSpreadsheetModule } from '../../../../helpers/google-spreadsheet/google-spreadsheet.module';
 
 @Module({
   imports: [
@@ -12,6 +13,7 @@ import { MongooseModule } from '@nestjs/mongoose';
         schema: ProjectSchema,
       },
     ]),
+    GoogleSpreadsheetModule,
   ],
   providers: [ProjectService],
   controllers: [ProjectController],

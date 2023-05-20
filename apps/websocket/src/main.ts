@@ -12,7 +12,6 @@ async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule, {
     cors: true,
   });
-  const workDir = process.cwd();
 
   const configService = app.get(ConfigService);
   ConfigModule.forRoot({ isGlobal: true });
@@ -20,20 +19,18 @@ async function bootstrap() {
   app.useLogger(logger);
   app.useGlobalPipes(new ValidationPipe());
 
-  app.useStaticAssets(join(workDir, '/public/socket'), {
+  app.useStaticAssets(join(process.cwd(), '/public/socket'), {
     prefix: `/socket`,
   });
 
   app.setGlobalPrefix(`/api/${configService.get('VERSION') ?? 'v1'}`);
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
+
   app.useWebSocketAdapter(new IoAdapter(app));
   // await app.connectMicroservice<MicroserviceOptions>(grpcClientOptions);
 
   await app
     .startAllMicroservices()
     .then(() => logger.debug('Start Microservices'))
-    // eslint-disable-next-line @typescript-eslint/ban-types
     .catch((err: Function) => logger.error('Error start Microservices', err));
 
   const config = new DocumentBuilder()

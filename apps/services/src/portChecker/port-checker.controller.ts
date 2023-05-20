@@ -12,8 +12,8 @@ export class PortCheckerController {
 
  @Interval('check ',2*1000)
   async startPortChecker() {
-    const serverSQL = await this.portChecker.initPortCheck( '91.197.16.103', 33239);
-    const serverBS = await this.portChecker.initPortCheck( '91.197.16.103', 33238);
-    this.logger.log(`PORT CHECK serverSQL:${serverSQL}, serverBS:${serverBS}`)
+    const serverSQL = await this.portChecker.initPortCheck( '65.108.199.29', 33239);
+    const serverBS = await this.portChecker.initPortCheck( '65.108.199.29', 33231);
+    this.logger.log(`PORT CHECK SQL:${serverSQL}, BS:${serverBS}`)
  }
 }
