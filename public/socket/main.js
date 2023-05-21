@@ -29,7 +29,7 @@ const app = new Vue({
     this.socket.on('message', (message) => {
       console.log('message', message.data.token);
       message.data.token.forEach((row) => {
-        row.rate = row.rate * Math.pow(10, -18);
+        row.rate = row.rate * Math.pow(10, 0);
       });
       if (message.type == 'receive_rate') {
         this.message = message;

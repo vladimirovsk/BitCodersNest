@@ -3,7 +3,7 @@
   "sourceRoot": "apps/rest/src",
   "compilerOptions": {
     "tsConfigPath": "apps/rest/tsconfig.app.json",
-    "webpack": true
+    "webpack": false
   },
   "monorepo": true,
   "root": "apps/rest",
@@ -33,6 +33,15 @@
       "sourceRoot": "apps/websocket/src",
       "compilerOptions": {
         "tsConfigPath": "apps/websocket/tsconfig.app.json"
+      }
+    },
+    "discord-bot": {
+      "type": "application",
+      "root": "apps/discord-bot",
+      "entryFile": "main",
+      "sourceRoot": "apps/discord-bot/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/discord-bot/tsconfig.app.json"
       }
     }
   }

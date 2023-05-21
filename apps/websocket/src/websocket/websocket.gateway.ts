@@ -69,10 +69,10 @@ export class WebSocketServerGateway
   }
 
   handleConnection(client: Socket, ...args: string[]) {
-    this.logger.debug(`Client connection ${client.id}`);
+    this.logger.debug(`Client connection ${client.id} ${client.connected}`);
   }
 
   handleDisconnect(client: Socket) {
-    this.logger.debug(`Client disconnect ${client.id}`);
+    this.logger.debug(`Client disconnect ${client.id} `);
   }
 }

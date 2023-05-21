@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "useDefineForClassFields": false,
     "esModuleInterop": true,
     "allowJs": true,
     "preserveConstEnums": true,
@@ -22,6 +23,23 @@
     "strictBindCallApply": false,
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false,
-    "paths": {}
+    "paths": {
+      "@Configs/*": [
+        "configs/*"
+      ],
+      "@Service/*": [
+        "apps/service/*"
+      ],
+      "@Rest/*": [
+        "apps/rest/*"
+      ],
+      "@Middleware/*": [
+        "middleware/*"
+      ],
+      "@Libs/*": [
+        "libs/*"
+      ]
+
+    }
   }
 }

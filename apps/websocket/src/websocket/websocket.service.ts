@@ -12,9 +12,11 @@ export class WebsocketService implements OnModuleInit {
   private tokens = [
     { symbol: 'BTC', current_rate: '22001' },
     { symbol: 'ETH', current_rate: '1600' },
+    { symbol: 'DOGE', current_rate: '600' },
   ];
 
   private logger = new Logger(WebsocketService.name);
+
   private dataMessage: IWebsocketMessage = {
     type: TypeSocketMessage.receive_rate,
     block: 0,
@@ -56,7 +58,7 @@ export class WebsocketService implements OnModuleInit {
       const contract = { block_last: 1000 };
 
       currentData.rate = String(
-        this.getRandom(1600000000000000000000000, 2300000000000000000000000),
+        this.getRandom(16000, 23000),
       );
 
       const token = this.tokens.find(
@@ -66,11 +68,10 @@ export class WebsocketService implements OnModuleInit {
 
       if (String(currentData.rate) != String(token?.current_rate)) {
         if (this.dataMessage.block != contract?.block_last) {
-          this.dataMessage.block = Number(1000);
+          this.dataMessage.block += Number(1000);
         }
         currentData.time = new Date().getTime();
-
-        //console.log( currentData.rate);
+        // console.log( currentData.rate);
       }
     }
 

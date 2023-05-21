@@ -25,6 +25,7 @@ export class PortCheckerService{
       socket.on('error', () => {
         socket.destroy();
         resolve(false);
+        //reject(false)
       });
       socket.connect(port, host);
     });

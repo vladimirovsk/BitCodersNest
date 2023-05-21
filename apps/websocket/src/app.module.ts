@@ -1,8 +1,8 @@
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { ScheduleModule } from '@nestjs/schedule';
-import { LoggerMiddleware } from '../../services/src/middleware/logger.middleware';
 import { WebsocketModule } from './websocket/websocket.module';
+import { LoggerMiddleware } from '../../../middleware/logger.middleware';
 
 @Module({
   imports: [
