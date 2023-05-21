@@ -1,4 +1,4 @@
-import { Body, Controller, HttpCode, HttpStatus, Post, UsePipes, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, HttpCode, HttpStatus, Post, Req, UsePipes, ValidationPipe } from '@nestjs/common';
 import { ApiForbiddenResponse, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { AuthService } from './auth.service';
 import { CreateUserDto } from '../users/dto/user-create.dto';
@@ -7,6 +7,7 @@ import { UserSelectDto } from '../users/dto/user-select.dto';
 import { AuthTokenDto } from './auth.dto';
 import { ResponseHttp } from '../../../../constant/response.dto';
 import { RMQRoute } from 'nestjs-rmq';
+import { Request } from 'express';
 
 @ApiTags('Auth')
 @Controller('auth')
@@ -17,7 +18,6 @@ export class AuthController {
     private authService: AuthService
   ) {
   }
-
 
   @ApiOperation({ summary: 'Register user from token' })
   @ApiResponse({

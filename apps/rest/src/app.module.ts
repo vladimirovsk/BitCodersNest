@@ -1,13 +1,17 @@
-import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
+import { MiddlewareConsumer, Module, NestModule, RequestMethod } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { AppService } from './app.service';
 import { getMongoString } from '../../../configs/mongo.config';
-import { AppLoggerModule } from '@Middleware/app-logger/app-logger.module';
+import { AppLoggerModule } from '../../../middleware/app-logger/app-logger.module';
 import * as Joi from '@hapi/joi';
 import { MongooseModule } from '@nestjs/mongoose';
-import { LoggerMiddleware } from '@Middleware/logger.middleware';
+import { LoggerMiddleware } from '../../../middleware/logger.middleware';
 import { RMQModule } from 'nestjs-rmq';
 import { getRMQConfig } from '@Configs/rmq.config';
+import { ProjectModule } from '../src/project/project.module';
+import { UserModule } from '../src/users/user.module';
+import { AuthModule } from '../src/auth/auth.module';
+import { GoogleAuthModule } from '@Rest/src/google-auth/google-auth.module';
 // import { AppLoggerService } from '@Middleware/app-logger/app-logger.service';
 
 const configService = new ConfigService();
@@ -36,16 +40,18 @@ const configService = new ConfigService();
       }),
       inject: [ConfigService],
     }),
-    // // ScheduleModule.forRoot(),
-    // ProjectModule,
-    // UserModule,
-    // AuthModule,
-    // GoogleAuthModule,
+    // ScheduleModule.forRoot(),
+    ProjectModule,
+    UserModule,
+    AuthModule,
+    GoogleAuthModule,
   ],
   providers: [AppService],
 })
 export class AppModule implements NestModule {
-  configure(consumer: MiddlewareConsumer): any {
-    consumer.apply(LoggerMiddleware).forRoutes('*');
+  configure(consumer: MiddlewareConsumer) {
+    consumer
+      .apply(LoggerMiddleware)
+      .forRoutes({ path: '/api/*', method: RequestMethod.ALL });
   }
 }

@@ -79,7 +79,6 @@ export class GoogleAuthService {
     const name = String(userData.name);
     const user = await this.userService.createWithGoogle(email, name);
     return this.handleRegisteredUser(user);
-    //return name;
   }
 
   async getUserData(token: string) {

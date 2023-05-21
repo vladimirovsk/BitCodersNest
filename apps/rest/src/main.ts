@@ -4,7 +4,7 @@ import { NestExpressApplication } from '@nestjs/platform-express';
 import { ValidationPipe, Logger } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import { AppLoggerService } from '@Middleware/app-logger/app-logger.service';
+import { AppLoggerService } from '../../../middleware/app-logger/app-logger.service';
 import { join } from 'path';
 
 async function bootstrap() {
@@ -53,7 +53,7 @@ async function bootstrap() {
     .build();
 
   app.useStaticAssets(join(process.cwd(), '/public/client'), {
-    prefix: `client`,
+    prefix: `/client`,
   });
 
   app.setGlobalPrefix(`/api/${configService.get('VERSION') ?? 'v1'}`);
