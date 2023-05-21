@@ -1,10 +1,11 @@
-FROM node:16.8.0-alpine As build
+FROM node:18.16.0 As build
 
 WORKDIR /usr/src/app
 
 COPY package*.json ./
 
-RUN npm ci --only=production && npm cache clean --force
+#RUN npm ci --only=production && npm cache clean --force
+RUN npm install
 
 COPY  . .
 
