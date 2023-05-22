@@ -59,7 +59,7 @@ services:
 
   rabbitmq_bitcoders:
     image: rabbitmq:3.9-management
-    container_name: rabbitmq
+    container_name: rabbitmq_bitcoders
     restart: always
     env_file:
       - .env
