@@ -23,7 +23,6 @@ pipeline {
                 echo 'Deploying....'
                 catchError {
                     script {
-                        sh "sudo chmod 755 -R . /var/lib/jenkins/workspace/BitCodersNest/.docker/"
                         sh "docker-compose up -d --build"
                     }
                 }
