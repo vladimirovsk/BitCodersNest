@@ -3,7 +3,14 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                 echo 'Build..'
+                sh 'cp /opt/project/BitCodersNest/.env /var/lib/jenkins/workspace/BitCodersNest/.env'
+                echo 'Building..'
+                catchError {
+                    script {
+                        echo 'Stop mongo..'
+                        sh 'docker stop mongo_bitcoders'
+                    }
+                }
             }
         }
         stage('Test') {
@@ -16,6 +23,7 @@ pipeline {
                 echo 'Deploying....'
                 catchError {
                     script {
+                        sh "sudo chmod 755 -R /var/lib/jenkins/workspace/BitCodersNest/.docker"
                         sh "docker-compose up -d --build"
                     }
                 }
