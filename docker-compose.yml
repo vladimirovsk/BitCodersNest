@@ -8,7 +8,7 @@ services:
     command: [ "npm", "run", "sock:prod" ]
     restart: always
     env_file:
-      - .env.docker
+      - .env
     ports:
       - '8000:8000'
     networks:
@@ -21,7 +21,7 @@ services:
     command: ["npm", "run", "rest:prod"]
     restart: always
     env_file:
-      - .env.docker
+      - .env
     ports:
       - '9087:9087'
     networks:
