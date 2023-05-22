@@ -78,7 +78,7 @@ services:
       - ./.docker/rabbitmq/data/:/var/lib/rabbitmq/
     ports:
       - 5672:5672
-      - 5672:15672
+      - 15672:15672
     networks:
       - bitcoders
 
