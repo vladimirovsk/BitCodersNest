@@ -21,7 +21,7 @@ export class AuthService implements OnModuleInit {
   constructor(
     private readonly userService: UserService,
     private readonly jwtService: JwtService,
-    private readonly rmqService: RMQService,
+    // private readonly rmqService: RMQService,
 
     private readonly configService: ConfigService,
     private readonly googleSheetService: GoogleSpreadsheetService,

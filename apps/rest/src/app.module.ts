@@ -32,7 +32,7 @@ const configService = new ConfigService();
       envFilePath: '.env',
       isGlobal: true,
     }),
-    RMQModule.forRootAsync(getRMQConfig()),
+    // RMQModule.forRootAsync(getRMQConfig()),
     MongooseModule.forRootAsync({
       imports: [ConfigModule],
       useFactory: async (configService: ConfigService) => ({
