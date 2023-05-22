@@ -26,8 +26,6 @@ services:
       - '9087:9087'
     networks:
       - bitcoders
-    depends_on:
-      - mongo_bitcoders
 
   rabbitmq_bitcoders:
     image: rabbitmq:3.9-management
