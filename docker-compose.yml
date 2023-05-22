@@ -27,6 +27,17 @@ services:
     networks:
       - bitcoders
 
+  serv_bitcoders:
+    container_name: serv_bitcoders
+    build:
+      context: .
+    command: [ "npm", "run", "serv:prod" ]
+    restart: always
+    env_file:
+      - .env
+    networks:
+      - bitcoders
+
   mongo_bitcoders:
     image: mongo:6.0.3
     container_name: mongo_bitcoders
