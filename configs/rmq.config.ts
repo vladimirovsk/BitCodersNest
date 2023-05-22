@@ -10,7 +10,7 @@ export const getRMQConfig = (): IRMQServiceAsyncOptions => ({
       {
         login: configService.get('RABBITMQ_USER') ?? 'test',
         password: configService.get('RABBITMQ_PASSWORD') ?? 'test',
-        host: configService.get('RABBITMQ_HOST') ?? 'localhost',
+        host: String(configService.get('RABBITMQ_HOST')),
       },
     ],
     queueName: configService.get('RABBITMQ_QNAME') ?? 'bitcoders',
