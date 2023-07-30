@@ -49,8 +49,7 @@ export class GoogleAuthController {
 
   @Post()
     async authenticate(@Body() tokenData: TokenVerificationDto, @Req() request: Request) {
-    console.log(tokenData.token)
-    console.log(process.env.GOOGLE_AUTH_CLIENT_ID)
+    console.log(process.env.GOOGLE_AUTH_PROJECT_ID)
     const ticket =  await client.verifyIdToken({
       idToken: tokenData.token,
       audience: process.env.GOOGLE_AUTH_CLIENT_ID,

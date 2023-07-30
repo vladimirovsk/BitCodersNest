@@ -26,20 +26,6 @@ export class AppService implements OnModuleInit {
     private readonly configService: ConfigService
   ) {}
   onModuleInit() {
-
-    const applicants:IApplicant[]= [{user: '63eaadc54bbcb0001b624797', status: 'confirmed'}];
-    applicants[0].appliedAt = new Date();
-    console.log('OLD', applicants)
-
-    let result:any = {
-      testRecord1: '1',
-      testRecord2: '2',
-    }
-
-    result.testRecord3 = '3';
-
-    console.log(result);
-
     // test async function
     // const timeArr = [4000, 8000, 1000, 3000];
     // this.logger.log('REST SERVICE STARTING');
