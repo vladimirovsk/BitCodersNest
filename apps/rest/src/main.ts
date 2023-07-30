@@ -19,17 +19,10 @@ async function bootstrap() {
 
   const configService = app.get(ConfigService);
 
-  ConfigModule.forRoot({
-    // envFilePath: `.env.${environment}`,
-    // envFilePath: '.env',
-    isGlobal: true,
-  });
-
   logger.debug(`USE MONGO_HOST: ${configService.get('MONGO_HOST')}`);
 
   app.enableCors();
   app.useGlobalPipes(new ValidationPipe());
-
   app.useLogger(app.get(AppLoggerService));
 
   // explorer?: boolean;

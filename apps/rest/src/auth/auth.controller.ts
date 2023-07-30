@@ -6,8 +6,6 @@ import { AccountLogin } from '../../../../libs/contracts';
 import { UserSelectDto } from '../users/dto/user-select.dto';
 import { AuthTokenDto } from './auth.dto';
 import { ResponseHttp } from '../../../../constant/response.dto';
-import { RMQRoute } from 'nestjs-rmq';
-import { Request } from 'express';
 
 @ApiTags('Auth')
 @Controller('auth')

@@ -46,18 +46,26 @@ export class GoogleAuthController {
 
     return HttpStatus.OK
     }
+
   @Post()
     async authenticate(@Body() tokenData: TokenVerificationDto, @Req() request: Request) {
-       const {
-         accessTokenCookie,
-         refreshTokenCookie,
-         user,
-       } = await this.googleAuthService.authenticate(tokenData.token);
+    console.log(tokenData.token)
+    console.log(process.env.GOOGLE_AUTH_CLIENT_ID)
+    const ticket =  await client.verifyIdToken({
+      idToken: tokenData.token,
+      audience: process.env.GOOGLE_AUTH_CLIENT_ID,
+    });
+    console.log(ticket)
+       // const {
+       //   accessTokenCookie,
+       //   refreshTokenCookie,
+       //   user,
+       // } = await this.googleAuthService.authenticate(tokenData.token);
 
-    if (request.res!= undefined) {
-      request.res.setHeader('Set-Cookie', [accessTokenCookie, refreshTokenCookie]);
-    }
+    //if (request.res!= undefined) {
+     // request.res.setHeader('Set-Cookie', [accessTokenCookie, refreshTokenCookie]);
+   // }
 
-    return request
+    return ticket
   }
 }

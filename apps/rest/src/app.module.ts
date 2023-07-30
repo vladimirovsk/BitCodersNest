@@ -6,22 +6,17 @@ import { AppLoggerModule } from '../../../middleware/app-logger/app-logger.modul
 import * as Joi from '@hapi/joi';
 import { MongooseModule } from '@nestjs/mongoose';
 import { LoggerMiddleware } from '../../../middleware/logger.middleware';
-import { RMQModule } from 'nestjs-rmq';
-import { getRMQConfig } from '@Configs/rmq.config';
 import { ProjectModule } from '../src/project/project.module';
 import { UserModule } from '../src/users/user.module';
 import { AuthModule } from '../src/auth/auth.module';
-import { GoogleAuthModule } from '@Rest/src/google-auth/google-auth.module';
-// import { AppLoggerService } from '@Middleware/app-logger/app-logger.service';
-
-const configService = new ConfigService();
+import { GoogleAuthModule } from '../src/google-auth/google-auth.module';
 
 @Module({
   imports: [
-    AppLoggerModule,
     ConfigModule.forRoot({
       envFilePath: '.env', //`.env.${environment}`,
       isGlobal: true,
+      load: [()=>({'appName':'APP_NAME_TEST_CONFIG'})],
     }),
     ConfigModule.forRoot({
       validationSchema: Joi.object({
@@ -32,6 +27,7 @@ const configService = new ConfigService();
       envFilePath: '.env',
       isGlobal: true,
     }),
+    AppLoggerModule,
     // RMQModule.forRootAsync(getRMQConfig()),
     MongooseModule.forRootAsync({
       imports: [ConfigModule],
@@ -47,6 +43,7 @@ const configService = new ConfigService();
     GoogleAuthModule,
   ],
   providers: [AppService],
+
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {

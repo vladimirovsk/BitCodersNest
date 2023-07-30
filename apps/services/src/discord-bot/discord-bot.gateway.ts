@@ -1,7 +1,6 @@
-import { Injectable, Logger, OnModuleInit, UseGuards, UseInterceptors } from '@nestjs/common';
-import { InjectDiscordClient, On, Once, MessageEvent } from '@discord-nestjs/core';
+import { Injectable, Logger, OnModuleInit } from '@nestjs/common';
+import { InjectDiscordClient, On, Once } from '@discord-nestjs/core';
 import { Client, Message } from 'discord.js';
-import { CollectorInterceptor, PrefixCommandInterceptor, PrefixCommandPipe } from '@discord-nestjs/common';
 
 @Injectable()
 export class DiscordBotGateway implements OnModuleInit {
@@ -13,9 +12,41 @@ export class DiscordBotGateway implements OnModuleInit {
   ) {}
 
   onModuleInit() {
-	  console.log('MODULE INIT: '+DiscordBotGateway.name);
-		//this.client.channels.client
+    console.log('MODULE INIT: ' + DiscordBotGateway.name);
+    //this.client.channels.client
   }
+
+  @On('messageUpdate')
+  async onMessageUpdate(oldMessage: Message, newMessage: Message){
+      console.log('OLD:', oldMessage);
+    console.log('NEW:', newMessage);
+  }
+
+  @On('message')
+  async onMessage(message: Message){
+    console.log('MESSAGE', message.content);
+    await message.reply("I'm watching message");
+  }
+
+  @On('messageCreate')
+  async onMessageCreate(message: Message) {
+    if (!message.author.bot) {
+      message.channel.send('TEST')
+      console.log('MESSAGE_CREATE', message.content);
+      await message.reply("I'm watching messageCreate");
+    }
+  }
+
+  @On('ready')
+  async onReadyOn(){
+    if (this.client?.user) {
+      const chanel = await this.client.channels.fetch('1077719849834393734');
+      // console.log('CHANEL', chanel);
+    }
+  }
+  // client.on('ready', client => {
+  // client.channels.get('CHANNEL ID').send('Hello here!');
+// })
 
   @Once('ready')
   onReady() {
@@ -24,8 +55,10 @@ export class DiscordBotGateway implements OnModuleInit {
     }
   }
 
-  //  @On('messageCreate')
-  // // @UseInterceptors(CollectorInterceptor)
+
+
+  //   @On('messageCreate')
+  // // // @UseInterceptors(CollectorInterceptor)
   // // @UseCollectors(AppreciatedReactionCollector)
   //  async onMessage(message: Message): Promise<void> {
   // 	// console.log('MESSAGE', message.content);

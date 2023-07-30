@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 
 import { DiscordModuleOption, DiscordOptionsFactory } from '@discord-nestjs/core';
-import { GatewayIntentBits } from 'discord.js';
+import { GatewayIntentBits, Message } from 'discord.js';
 
 @Injectable()
 export class DiscordConfigService implements DiscordOptionsFactory {
@@ -23,7 +23,9 @@ export class DiscordConfigService implements DiscordOptionsFactory {
       },
       registerCommandOptions: [
         {
-          // forGuild: '1077719849834393734',//<string>this.configService.get('GUILD_ID_WITH_COMMANDS'),
+          allowFactory: (message: Message) =>
+            !message.author.bot && message.content === '!deploy',
+          forGuild: '1105920777951379656',//<string>this.configService.get('GUILD_ID_WITH_COMMANDS'),
           removeCommandsBefore: true,
         },
       ],

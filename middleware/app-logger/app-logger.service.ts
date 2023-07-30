@@ -1,13 +1,23 @@
-import { ConsoleLogger, Injectable } from '@nestjs/common';
+import { ConsoleLogger, Inject, Injectable } from '@nestjs/common';
 import { LogLevel } from '@nestjs/common/services/logger.service';
+import { GoogleLoggerService } from '../google-logger/google.logger.service';
+import { ConfigService } from '@nestjs/config';
+import { google } from '@google-cloud/logging/build/protos/protos';
+import LogSeverity = google.logging.type.LogSeverity;
 
 @Injectable()
 export class AppLoggerService extends ConsoleLogger {
-  constructor() {
+  constructor(
+    private googleLoggerService: GoogleLoggerService,
+    private configService: ConfigService
+  ) {
     super();
   }
 
   log(message: any, context?: string) {
+
+    //console.log('APP_NAME: ', typeLog:LogSeverity this.configService.get('appName'));
+    this.googleLoggerService.sendMessage(message, LogSeverity.INFO, String(this.configService.get('appName')),  'dev');
     const colorScope: LogLevel = 'warn';
     const colorMessg: LogLevel = 'log';
     if (!context) {

@@ -30,6 +30,8 @@
     "@discord-nestjs/common": "^5.2.4",
     "@discord-nestjs/core": "^5.3.6",
     "@google-cloud/local-auth": "^2.1.0",
+    "@google-cloud/logging": "^10.4.1",
+    "@google-cloud/storage": "^6.10.1",
     "@hapi/joi": "^17.1.1",
     "@nestjs/cli": "^9.3.0",
     "@nestjs/common": "^9.3.9",

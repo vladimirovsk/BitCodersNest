@@ -4,13 +4,14 @@ import { RateModule } from './rate/rate.module';
 import { DiscordBotModule } from './discord-bot/discord-bot.module';
 import { DiscordModule } from '@discord-nestjs/core';
 import { GatewayIntentBits } from 'discord.js';
-// import { DiscordConfigService } from '../../../configs/discord.config';
-import { DiscordConfigService } from '@Configs/discord.config';
-import { LoggerMiddleware } from '@Middleware/logger.middleware';
+import { DiscordConfigService } from '../../../configs/discord.config';
+import { LoggerMiddleware } from '../../../middleware/logger.middleware';
+import { PortCheckerModule } from './portChecker/port-checker.module';
 
 // if (process.env.PORT_CHECKER === 'true') {
 //   imports.push(PortCheckerModule);
 // }
+
 
 @Module({
   imports: [
@@ -19,8 +20,10 @@ import { LoggerMiddleware } from '@Middleware/logger.middleware';
       useClass: DiscordConfigService,
     }),
     RateModule,
+    // PortCheckerModule,
     DiscordBotModule,
   ],
+  providers: []
 })
 export class AppModule {
   configure(consumer: MiddlewareConsumer) {

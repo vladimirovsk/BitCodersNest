@@ -22,24 +22,6 @@
     "noImplicitAny": false,
     "strictBindCallApply": false,
     "forceConsistentCasingInFileNames": false,
-    "noFallthroughCasesInSwitch": false,
-    "paths": {
-      "@Configs/*": [
-        "configs/*"
-      ],
-      "@Service/*": [
-        "apps/service/*"
-      ],
-      "@Rest/*": [
-        "apps/rest/*"
-      ],
-      "@Middleware/*": [
-        "middleware/*"
-      ],
-      "@Libs/*": [
-        "libs/*"
-      ]
-
-    }
+    "noFallthroughCasesInSwitch": false
   }
 }

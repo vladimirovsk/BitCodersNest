@@ -1,9 +1,17 @@
 import { Module } from '@nestjs/common';
 import { AppLoggerService } from './app-logger.service';
+import { GoogleLoggerModule } from '../google-logger/google-logger.module';
 
 @Module({
-	providers: [AppLoggerService],
-	exports: [AppLoggerService]
+	imports: [
+		GoogleLoggerModule
+	],
+	providers: [
+		AppLoggerService
+	],
+	exports: [
+		AppLoggerService
+	]
 })
 export class AppLoggerModule {
 
