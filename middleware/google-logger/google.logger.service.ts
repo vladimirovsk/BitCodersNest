@@ -59,9 +59,9 @@ export class GoogleLoggerService {
           if (!error){resolve(result)}
           else {reject(error)}
         })
-      }).then(()=>{
-        console.log(`Logged: ${message}`);
-      })
+      }).catch((err)=>{
+        console.error('Error send to Google logger', err)
+      });
 
     } catch (err) {
       console.error(`Error send to google logger ${err}`)

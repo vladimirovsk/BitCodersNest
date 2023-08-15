@@ -15,9 +15,7 @@ export class AppLoggerService extends ConsoleLogger {
   }
 
   log(message: any, context?: string) {
-
-    //console.log('APP_NAME: ', typeLog:LogSeverity this.configService.get('appName'));
-    this.googleLoggerService.sendMessage(message, LogSeverity.INFO, String(this.configService.get('appName')),  'dev');
+    //this.googleLoggerService.sendMessage(message, LogSeverity.INFO, String(this.configService.get('appName')),  'dev');
     const colorScope: LogLevel = 'warn';
     const colorMessg: LogLevel = 'log';
     if (!context) {
