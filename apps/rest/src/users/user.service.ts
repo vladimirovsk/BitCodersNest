@@ -17,6 +17,10 @@ export class UserService {
     // private stripeService: StripeService
   ) {}
 
+  async findAll(): Promise<User | null>{
+    return this.userModel.find({}).lean();
+  }
+
   async getByEmailOneUserWithPassword(email: string): Promise<User | null> {
     return this.userModel
       .findOne(

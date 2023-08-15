@@ -57,6 +57,7 @@
     "discord.js": "^14.11.0",
     "google-spreadsheet": "^3.3.0",
     "googleapis": "^111.0.0",
+    "moment": "^2.29.4",
     "mongoose": "^6.10.0",
     "nest-google-sheet-connector": "^2.0.0",
     "nestjs-dynamic-providers": "^0.1.9",
