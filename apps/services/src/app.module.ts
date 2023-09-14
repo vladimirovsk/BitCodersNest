@@ -7,6 +7,7 @@ import { GatewayIntentBits } from 'discord.js';
 import { DiscordConfigService } from '../../../configs/discord.config';
 import { LoggerMiddleware } from '../../../middleware/logger.middleware';
 import { PortCheckerModule } from './portChecker/port-checker.module';
+import { SwaggerBotModule } from './swagger-bot/swagger-bot.module';
 
 // if (process.env.PORT_CHECKER === 'true') {
 //   imports.push(PortCheckerModule);
@@ -22,6 +23,7 @@ import { PortCheckerModule } from './portChecker/port-checker.module';
     RateModule,
     // PortCheckerModule,
     DiscordBotModule,
+    SwaggerBotModule
   ],
   providers: []
 })

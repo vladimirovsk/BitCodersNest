@@ -17,6 +17,7 @@ const app = new Vue({
     // this.socket = io("https://exchange-rate-ts.nimbusplatform.io");
     //  this.socket = io('http://116.203.136.246:8081');
     this.socket = io('http://localhost:8000');
+    // this.socket = io('http://localhost:3001');
 
     this.socket.on('connect', () => {
       this.title = 'CONNECTED';
