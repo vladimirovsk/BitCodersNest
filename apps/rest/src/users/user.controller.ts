@@ -2,9 +2,9 @@ import {
   Body,
   Controller,
   Get, HttpCode, HttpException,
-  HttpStatus, Param,
+  HttpStatus,
   Post,
-  Put, Query,
+  Put,
   UseGuards
 } from '@nestjs/common';
 import { UpdateUserDto } from './dto/user-update.dto';
@@ -25,18 +25,18 @@ import { UserEmail } from '../decorators/user-email.decorator';
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
-  @ApiOperation({ summary: 'Get user by email' })
+  @ApiOperation({ summary: 'Get all users' })
   @ApiResponse({
     status: HttpStatus.OK,
     description: 'Returned is OK',
   })
-  @Get('')
-  async getUserByEmail(@Query('email') email: string) {
-    const user = await this.userService.getByEmail(email);
-    if (!user) {
+  @Get('/')
+  async getAllUsers(@UserEmail() user: string) {
+    const users = await this.userService.findAll();
+    if (!users) {
       throw new HttpException('Users not found', HttpStatus.NOT_FOUND);
     }
-    return user;
+    return users;
   }
 
 

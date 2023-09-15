@@ -2,22 +2,15 @@ import { Module } from '@nestjs/common';
 import { DiscordModule } from '@discord-nestjs/core';
 import { HelpCommand } from './comands/help.command';
 import { DiscordBotGateway } from './discord-bot.gateway';
+import { InjectDynamicProviders } from 'nestjs-dynamic-providers';
 import { ErrorsCommand } from './comands/errors.command';
-import { DiscordBotClient } from './discord-bot.client';
-import { RMQModule } from 'nestjs-rmq';
-import { getRMQConfig } from '../../../../configs/rmq.config';
 
+// @InjectDynamicProviders('**/*.command.ts')
 @Module({
   imports: [
-    RMQModule.forRootAsync(getRMQConfig()),
     DiscordModule.forFeature(),
   ],
-  providers: [
-    HelpCommand,
-    ErrorsCommand,
-    DiscordBotGateway,
-    DiscordBotClient
-    ],
+  providers: [HelpCommand, ErrorsCommand, DiscordBotGateway],
 })
 
 export class DiscordBotModule {}
