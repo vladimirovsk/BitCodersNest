@@ -1,6 +1,7 @@
 import { forwardRef, Inject, Injectable, Logger, OnModuleInit } from '@nestjs/common';
 import net from 'net';
 import { TelegramBotService } from '../telegram-bot/telegram-bot.service';
+import { ConfigService } from '@nestjs/config';
 
 
 @Injectable()
@@ -9,6 +10,7 @@ export class PortCheckerService {
   @Inject(forwardRef(() => TelegramBotService))
   private readonly telegramBotService: TelegramBotService
   constructor(
+    private configService: ConfigService,
   ) {}
   async initPortCheck(host: string, port: number) {
     return new Promise((resolve, reject) => {
@@ -47,7 +49,7 @@ export class PortCheckerService {
         serverOKT,
         serverPROFIT
       }
-      await this.telegramBotService.sendMessage(JSON.stringify(status, null, 2), '-4040356453')
+      await this.telegramBotService.sendMessage(JSON.stringify(status, null, 2), <string>this.configService.get('TELEGRAM_BOT_CHANEL'))
         .catch(err=>{
          this.logger.error(err);
       })

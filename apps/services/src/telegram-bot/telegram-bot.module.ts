@@ -3,6 +3,7 @@ import { TelegramBotService } from './telegram-bot.service';
 import { TelegrafModule } from 'nestjs-telegraf';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { PortCheckerModule } from '../portChecker/port-checker.module';
+import { TelegramBotController } from './telegram-bot.controller';
 
 @Module({
 	imports:[
@@ -11,18 +12,14 @@ import { PortCheckerModule } from '../portChecker/port-checker.module';
 			imports: [ConfigModule],
 			useFactory: (configService: ConfigService) => ({
 				token: <string>configService.get<string>('TELEGRAM_BOT_TOKEN'),
-				// launchOptions: {
-				//   webhook: {
-				//     domain: 'domain.tld',
-				//     hookPath: '/secret-path',
-				//   }
-				// }
+
 			}),
 			inject: [ConfigService],
 		}),
 		forwardRef(()=>PortCheckerModule)
 	],
 	providers: [TelegramBotService],
+	controllers: [TelegramBotController],
 	exports: [TelegramBotService]
 })
 export class TelegramBotModule {}
