@@ -25,35 +25,35 @@ export class GoogleAuthService {
      this.oauthClient = new google.auth.OAuth2(clientID, clientSecret);
   }
 
-  async getCookiesForUser(user: User):Promise<GoogleAuthDto> {
-     const accessTokenCookie = this.authService.getCookieWithJwtAccessToken(
-       user.id,
-     );
-     const { cookie: refreshTokenCookie, token: refreshToken } =
-       this.authService.getCookieWithJwtRefreshToken(user.id);
-
-     await this.userService.setCurrentRefreshToken(refreshToken, user.id);
-
-    return {
-      accessTokenCookie,
-      refreshTokenCookie,
-      user
-    };
+  async getCookiesForUser(user: User) {
+    //  const accessTokenCookie = this.authService.getCookieWithJwtAccessToken(
+    //    user.id,
+    //  );
+    //  const { cookie: refreshTokenCookie, token: refreshToken } =
+    //    this.authService.getCookieWithJwtRefreshToken(user.id);
+    //
+    //  await this.userService.setCurrentRefreshToken(refreshToken, user.id);
+    //
+    // return {
+    //   accessTokenCookie,
+    //   refreshTokenCookie,
+    //   user
+    // };
  }
 
-  async handleRegisteredUser(user: User):Promise<GoogleAuthDto> {
-    if (!user.isRegisteredWithGoogle) {
-      throw new UnauthorizedException();
-    }
-
-    const { accessTokenCookie, refreshTokenCookie } =
-      await this.getCookiesForUser(user);
-
-    return {
-      accessTokenCookie,
-      refreshTokenCookie,
-      user,
-    };
+  async handleRegisteredUser(user: User) {
+    // if (!user.isRegisteredWithGoogle) {
+    //   throw new UnauthorizedException();
+    // }
+    //
+    // const { accessTokenCookie, refreshTokenCookie } =
+    //   await this.getCookiesForUser(user);
+    //
+    // return {
+    //   accessTokenCookie,
+    //   refreshTokenCookie,
+    //   user,
+    // };
   }
 
   async authenticate(token: string) {
