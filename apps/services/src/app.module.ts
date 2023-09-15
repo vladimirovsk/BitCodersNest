@@ -7,7 +7,6 @@ import { GatewayIntentBits } from 'discord.js';
 import { DiscordConfigService } from '../../../configs/discord.config';
 import { LoggerMiddleware } from '../../../middleware/logger.middleware';
 import { PortCheckerModule } from './portChecker/port-checker.module';
-import { SwaggerBotModule } from './swagger-bot/swagger-bot.module';
 import { TelegramBotModule } from './telegram-bot/telegram-bot.module';
 import { TelegrafModule } from 'nestjs-telegraf';
 import { OpenAiModule } from './openai/open-ai.module';
@@ -27,7 +26,6 @@ import { OpenAiModule } from './openai/open-ai.module';
     RateModule,
     PortCheckerModule,
     DiscordBotModule,
-    SwaggerBotModule,
     TelegramBotModule,
     OpenAiModule,
   ],

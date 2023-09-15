@@ -22,20 +22,20 @@ export class GoogleSpreadsheetService {
   }
 
   async createDoc() {
-    const doc = new GoogleSpreadsheet(this.spreadsheetId);
-    return doc;
+    // const doc = new GoogleSpreadsheet(this.spreadsheetId);
+    // return doc;
   }
 
   async readDoc() {
-    const doc = new GoogleSpreadsheet(this.spreadsheetId);
-    const config = getGoogleSheetsCred(this.configService)
-    config.private_key = this.configService.get('GOOGLE_SHEET_PRIVATE_KEY').replace(/\\n/g, '\n');
-    await doc.useServiceAccountAuth(getGoogleSheetsCred(this.configService)).catch(err=>{
-      console.error('CONFIG GOOGLE', err);
-    })
-
-    const info = await doc.loadInfo();
-    this.logger.log(JSON.stringify(info));
+    // const doc = new GoogleSpreadsheet(this.spreadsheetId);
+    // const config = getGoogleSheetsCred(this.configService)
+    // config.private_key = this.configService.get('GOOGLE_SHEET_PRIVATE_KEY').replace(/\\n/g, '\n');
+    // await doc.useServiceAccountAuth(getGoogleSheetsCred(this.configService)).catch(err=>{
+    //   console.error('CONFIG GOOGLE', err);
+    // })
+    //
+    // const info = await doc.loadInfo();
+    // this.logger.log(JSON.stringify(info));
 
     //await doc.updateProperties({ title: 'Test Table' })
     //const sheet = await doc.sheetsByIndex[0];
