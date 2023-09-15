@@ -19,43 +19,43 @@ export class OpenAiService implements OnModuleInit {
   }
 
   onModuleInit() {
-    // const result = this.generateText('Test message').then((result) => {
-    //   this.logger.log(result);
-    //   return result;
-    // })
-	  //   .catch(err=>{
-		//     this.logger.error(err.message);
-	  //   })
+    const result = this.generateText('Test message').then((result) => {
+      this.logger.log(result);
+      return result;
+    })
+	    .catch(err=>{
+		    this.logger.error(err.message);
+	    })
+  }
+
+  async generateText(message: string) {
+    const complete = await this.openai.chat.completions.create({
+      messages: [{ role: 'user', content: message }],
+			temperature: 0.1,
+      model: this.CHAT_GPT_MODEL,
+    });
   }
 
   // async generateText(message: string) {
-  //   const complete = await this.openai.chat.completions.create({
-  //     messages: [{ role: 'user', content: message }],
-	// 		temperature: 0.1,
-  //     model: this.CHAT_GPT_MODEL,
-  //   });
+  //   //try {
+  //     const response = await axios.post(
+  //       'https://api.openai.com/v1/completions',
+  //       {
+	//         messages: [{ role: 'user', content: message }],
+  //         model: this.CHAT_GPT_MODEL,
+  //         temperature: 0.7,
+  //         // max_tokens: 100,
+  //       },
+  //       {
+  //         headers: {
+  //           'Content-Type': 'application/json',
+  //           authorization: `Bearer ${this.configuration.apiKey}`,
+  //         },
+  //       },
+  //     );
+  //   //  return response.data;
+  //   //} catch (error) {
+  //   //  throw new HttpException('Error generateText', error.message);
+  //   //}
   // }
-
-  async generateText(message: string) {
-    //try {
-      const response = await axios.post(
-        'https://api.openai.com/v1/completions',
-        {
-	        messages: [{ role: 'user', content: message }],
-          model: this.CHAT_GPT_MODEL,
-          temperature: 0.7,
-          // max_tokens: 100,
-        },
-        {
-          headers: {
-            'Content-Type': 'application/json',
-            authorization: `Bearer ${this.configuration.apiKey}`,
-          },
-        },
-      );
-    //  return response.data;
-    //} catch (error) {
-    //  throw new HttpException('Error generateText', error.message);
-    //}
-  }
 }
