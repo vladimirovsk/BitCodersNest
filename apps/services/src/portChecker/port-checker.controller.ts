@@ -1,6 +1,7 @@
-import { Controller, Logger } from '@nestjs/common';
+import { Controller, forwardRef, Inject, Logger } from '@nestjs/common';
 import { PortCheckerService } from './port-checker.service';
 import { Interval } from '@nestjs/schedule';
+import { TelegramBotService } from '../telegram-bot/telegram-bot.service';
 
 @Controller('port-checker')
 export class PortCheckerController {
@@ -10,10 +11,8 @@ export class PortCheckerController {
   ) {
   }
 
- @Interval('check ',2*1000)
-  async startPortChecker() {
-    const serverSQL = await this.portChecker.initPortCheck( '65.108.199.29', 33239);
-    const serverBS = await this.portChecker.initPortCheck( '65.108.199.29', 33231);
-    this.logger.log(`PORT CHECK SQL:${serverSQL}, BS:${serverBS}`)
+ @Interval('check ',60*1000)
+ private async _startPortChecker() {
+    this.portChecker.getStatusServers();
  }
 }
