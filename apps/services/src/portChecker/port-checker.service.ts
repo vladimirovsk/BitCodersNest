@@ -32,27 +32,39 @@ export class PortCheckerService {
     });
   }
 
-  async getStatusServers(getMessage: boolean = false){
-    const serverSQL = await this.initPortCheck( '65.108.199.29', 33239);
-    const serverPIP = await this.initPortCheck( '65.108.199.29', 33237);
-    const serverBS = await this.initPortCheck( '65.108.199.29', 33230);
-    const serverCL1 = await this.initPortCheck( '65.108.199.29', 33130);
-    const serverOKT = await this.initPortCheck( '65.108.199.29', 28543);
-    const serverPROFIT = await this.initPortCheck( '65.108.199.29', 28542);
+  private getStatusServer(server){
+    return this.initPortCheck('65.108.199.29', server.port)
+      .then(status => {
+        server.status = status;
+        return server;
+      });
+  }
 
-    if ((!serverSQL || !serverPIP || !serverBS || !serverCL1 || !serverOKT || !serverPROFIT || getMessage )  ) {
-      const status = {
-        serverSQL,
-        serverPIP,
-        serverBS,
-        serverCL1,
-        serverOKT,
-        serverPROFIT
-      }
-      await this.telegramBotService.sendMessage(JSON.stringify(status, null, 2), <string>this.configService.get('TELEGRAM_BOT_CHANEL'))
-        .catch(err=>{
-         this.logger.error(err);
-      })
+  async getStatusServersDto(getMessage: boolean = false){
+
+    const serversDto = [
+      { name:'serverSQL', status: false, port: 33239 },
+      { name:'serverPIP', status: false, port: 33237},
+      { name:'serverBS', status: false, port: 33230 },
+      { name:'serverCL1', status: false, port: 33130 },
+      { name:'serverOKT', status: false, port: 28543 },
+      { name:'serverPROFIT', status: false, port: 28542 }
+    ]
+
+    const promises = serversDto.map(server=> this.getStatusServer.call(this, server))
+
+    const result = await Promise.all(promises)
+
+    if (result.some(server => server.status === false)) {
+      const message = `Alarm Server access denied ${JSON.stringify(serversDto.filter(server => !server.status), null, 2)}`
+
+
+      await this.telegramBotService.sendMessage(
+          message,
+          <string>this.configService.get('TELEGRAM_BOT_CHANEL'))
+          .catch(err=>{
+           this.logger.error(err);
+        })
     }
   }
 }

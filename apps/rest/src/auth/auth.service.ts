@@ -15,7 +15,7 @@ import { GoogleSpreadsheetService } from '../../../../helpers/google-spreadsheet
 import { ConfigService } from '@nestjs/config';
 
 @Injectable()
-export class AuthService implements OnModuleInit {
+export class AuthService {
   private logger = new Logger(AuthService.name);
 
   constructor(
@@ -27,21 +27,6 @@ export class AuthService implements OnModuleInit {
     private readonly googleSheetService: GoogleSpreadsheetService,
   ) {}
 
-  async onModuleInit() {
-    // await this.googleSheetService.readDoc();
-    //   //setInterval(() => {
-    //   //setInterval(() => {
-    //   for (let a = 0; a < 1000000; a++) {
-    //     this.rmqService
-    //       .send<number[], number>('sum.rpc', [1, 2, 3, 4, 5, 6, 7, 8, 9])
-    //       .catch((err) => {
-    //         this.logger.error(`Error send to rabbit ${err}`);
-    //       })
-    //       .finally(() => {
-    //         console.log('Send to rabbit', a);
-    //       });
-    //   }
-  }
 
   async validateUser(email: string,  password: string): Promise<Pick<User, 'email'>> {
     const user = await this.userService.getByEmailOneUserWithPassword(email);

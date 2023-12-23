@@ -33,7 +33,7 @@ export class TelegramBotService  {
 
 	@Command( 'status')
 	async status(ctx: Context) {
-		await this.portCheckerService.getStatusServers(true)
+		await this.portCheckerService.getStatusServersDto(true)
 			.catch((e) => this.logger.error(`Error get status servers ${e.message}`))
 		this.logger.debug('Send status')
 	}
