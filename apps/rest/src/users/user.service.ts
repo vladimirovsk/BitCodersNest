@@ -1,23 +1,31 @@
-import { HttpException, HttpStatus, Injectable, Logger } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable, Logger, OnModuleInit } from '@nestjs/common';
 import { User } from './user.model';
 import { genSalt, hash } from 'bcryptjs';
 import { CreateUserDto } from './dto/user-create.dto';
 import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
-import { Cron } from "@nestjs/schedule";
+import { EventEmitter2 } from '@nestjs/event-emitter';
+
 
 @Injectable()
-export class UserService {
+export class UserService implements OnModuleInit {
   private logger = new Logger(UserService.name);
 
   constructor(
     @InjectModel(User.name)
     private readonly userModel: Model<User>,
+    private eventEmitter: EventEmitter2,
+  ) // private stripeService: StripeService
+  {}
 
-    // private stripeService: StripeService
-  ) {}
+  onModuleInit(): any {
+      setInterval(()=>{
+        this.logger.verbose('TEST EVENT')
+        this.eventEmitter.emit('TEST', 'message')
+      }, 1000);
+  }
 
-  async findAll(): Promise<User | null>{
+  async findAll(): Promise<User | null> {
     return this.userModel.find({}).lean();
   }
 
@@ -48,7 +56,7 @@ export class UserService {
       .lean();
   }
 
-  async getByEmail(email: string): Promise<User[] > {
+  async getByEmail(email: string): Promise<User[]> {
     const user = await this.userModel.find(
       { email },
       {

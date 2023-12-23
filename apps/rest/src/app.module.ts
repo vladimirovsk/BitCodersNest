@@ -10,9 +10,11 @@ import { ProjectModule } from '../src/project/project.module';
 import { UserModule } from '../src/users/user.module';
 import { AuthModule } from '../src/auth/auth.module';
 import { GoogleAuthModule } from '../src/google-auth/google-auth.module';
+import { ListenersModule } from './listeners/listeners.module';
 
 @Module({
   imports: [
+
     ConfigModule.forRoot({
       envFilePath: '.env', //`.env.${environment}`,
       isGlobal: true,
@@ -27,6 +29,7 @@ import { GoogleAuthModule } from '../src/google-auth/google-auth.module';
       envFilePath: '.env',
       isGlobal: true,
     }),
+    ListenersModule,
     AppLoggerModule,
     // RMQModule.forRootAsync(getRMQConfig()),
     MongooseModule.forRootAsync({
