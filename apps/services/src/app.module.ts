@@ -29,7 +29,7 @@ import { OpenAiModule } from './openai/open-ai.module';
     DiscordBotModule,
     SwaggerBotModule,
     TelegramBotModule,
-    OpenAiModule,
+    // OpenAiModule,
   ],
   providers: []
 })

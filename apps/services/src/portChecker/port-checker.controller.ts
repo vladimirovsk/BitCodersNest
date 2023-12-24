@@ -11,8 +11,8 @@ export class PortCheckerController {
   ) {
   }
 
- @Interval('check ',60*1000)
+ @Interval('check ',6*1000)
  private async _startPortChecker() {
-    this.portChecker.getStatusServers();
+    await this.portChecker.getStatusServersDto();
  }
 }
