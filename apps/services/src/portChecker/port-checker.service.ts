@@ -66,5 +66,7 @@ export class PortCheckerService {
            this.logger.error(err);
         })
     }
+
+    if (getMessage) return result
   }
 }
