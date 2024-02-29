@@ -1,7 +1,6 @@
 import { Injectable, Logger, OnModuleInit } from '@nestjs/common';
 import { InjectDiscordClient } from '@discord-nestjs/core';
 import { Client } from 'discord.js';
-import { TelegramBotService } from '../telegram-bot/telegram-bot.service';
 
 @Injectable()
 export class RateService implements OnModuleInit{

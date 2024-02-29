@@ -7,6 +7,6 @@ export class UserListener{
 
 	@OnEvent('TEST')
 	testEvents(payload){
-		this.logger.error(`EMMIT PUSHER TEST ${payload}`)
+		//this.logger.error(`EMMIT PUSHER TEST ${payload}`)
 	}
 }

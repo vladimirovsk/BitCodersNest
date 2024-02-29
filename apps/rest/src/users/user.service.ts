@@ -20,8 +20,8 @@ export class UserService implements OnModuleInit {
 
   onModuleInit(): any {
       setInterval(()=>{
-        this.logger.verbose('TEST EVENT')
-        this.eventEmitter.emit('TEST', 'message')
+        // this.logger.verbose('TEST EVENT')
+        //this.eventEmitter.emit('TEST', 'message')
       }, 1000);
   }
 

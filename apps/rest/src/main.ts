@@ -21,7 +21,14 @@ async function bootstrap() {
 
   logger.debug(`USE MONGO_HOST: ${configService.get('MONGO_HOST')}`);
 
-  app.enableCors();
+  app.enableCors({
+    origin: '*',
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true,
+    optionsSuccessStatus: 200,
+    preflightContinue: false,
+  });
   app.useGlobalPipes(new ValidationPipe());
   app.useLogger(app.get(AppLoggerService));
 

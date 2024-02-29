@@ -14,7 +14,6 @@ import { ListenersModule } from './listeners/listeners.module';
 
 @Module({
   imports: [
-
     ConfigModule.forRoot({
       envFilePath: '.env', //`.env.${environment}`,
       isGlobal: true,
