@@ -2,7 +2,7 @@ import {
   Body,
   Controller,
   Get, HttpCode, HttpException,
-  HttpStatus, Param,
+  HttpStatus, NotFoundException, Param,
   Post,
   Put, Query,
   UseGuards
@@ -30,11 +30,11 @@ export class UserController {
     status: HttpStatus.OK,
     description: 'Returned is OK',
   })
-  @Get('')
-  async getUserByEmail(@Query('email') email: string) {
+  @Get('/:email')
+  async getUserByEmail(@Param('email') email: string) {
     const user = await this.userService.getByEmail(email);
     if (!user) {
-      throw new HttpException('Users not found', HttpStatus.NOT_FOUND);
+      throw new NotFoundException('Users not found');
     }
     return user;
   }
