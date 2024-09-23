@@ -37,4 +37,4 @@ jobs:
             cd project/BitCodersNest
             git checkout master
             git pull
-            sudo docker-compose up -d --build
+            sudo svladimirov:${{ secrets.SSH_PASSWORD }}@docker-compose up -d --build
