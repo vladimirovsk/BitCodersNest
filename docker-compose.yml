@@ -1,8 +1,7 @@
-version: '3.6'
 services:
 
-  websocket_bitcoders:
-    container_name: websocket_bitcoders
+  websocket-itcoder:
+    container_name: websocket-itcoder
     build:
       context: .
     command: [ "npm", "run", "sock:prod" ]
@@ -12,10 +11,10 @@ services:
     ports:
       - '8000:8000'
     networks:
-      - bitcoders
+      - itcoder
 
-  rest_bitcoders:
-    container_name: rest_bitcoders
+  rest-itcoder:
+    container_name: rest-itcoder
     build:
       context: .
     command: ["npm", "run", "rest:prod"]
@@ -25,10 +24,10 @@ services:
     ports:
       - '9087:9087'
     networks:
-      - bitcoders
+      - itcoder
 
-  serv_bitcoders:
-    container_name: serv_bitcoders
+  serv-itcoder:
+    container_name: serv-itcoder
     build:
       context: .
     command: [ "npm", "run", "serv:prod" ]
@@ -36,8 +35,8 @@ services:
     env_file:
       - .env
     networks:
-      - bitcoders
+      - itcoder
 
 networks:
-  bitcoders:
+  itcoder:
     driver: bridge

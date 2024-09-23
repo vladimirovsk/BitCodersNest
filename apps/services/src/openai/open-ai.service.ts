@@ -6,7 +6,8 @@ import axios from 'axios';
 @Injectable()
 export class OpenAiService implements OnModuleInit {
 	private logger = new Logger(OpenAiService.name)
-  private CHAT_GPT_MODEL = 'gpt-3.5-turbo'//'gpt-3.5-turbo';
+	// private CHAT_GPT_MODEL = 'gpt-3.5-turbo'//'gpt-3.5-turbo';
+	private CHAT_GPT_MODEL = 'gpt-4.0'
 
 	private configuration =  {
 		apiKey: <string>process.env.OPENAI_API_KEY,

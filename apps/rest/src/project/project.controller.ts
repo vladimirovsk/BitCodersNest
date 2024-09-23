@@ -39,7 +39,7 @@ export class ProjectController {
   }
 
   // @UseGuards(JwtAuthGuard)
-  @ApiOperation({ summary: 'Get all project' })
+  @ApiOperation({ summary: 'Get all projects' })
   @ApiResponse({
     status: HttpStatus.OK,
     description: 'Returned is OK',

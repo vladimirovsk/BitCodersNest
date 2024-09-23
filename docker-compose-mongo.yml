@@ -1,9 +1,9 @@
 version: '3.6'
 services:
 
-  mongo_bitcoders:
+  mongo_itcoder:
     image: mongo:6.0.3
-    container_name: mongo_bitcoders
+    container_name: mongo_itcoder
     restart: always
     env_file:
       - .env
@@ -19,11 +19,11 @@ services:
     ports:
       - "27017:27017"
     networks:
-      - bitcoders
+      - itcoder
 
-  rabbitmq_bitcoders:
+  rabbitmq_itcoder:
     image: rabbitmq:3.9-management
-    container_name: rabbitmq_bitcoders
+    container_name: rabbitmq_itcoder
     restart: always
     env_file:
       - .env
@@ -44,8 +44,8 @@ services:
       - 5672:5672
       - 15672:15672
     networks:
-      - bitcoders
+      - itcoder
 
 networks:
-  bitcoders:
+  itcoder:
     driver: bridge
