@@ -9,15 +9,19 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
-      - name: Publish directory
-        uses: elgohr/Publish-Docker-Github-Action@master
-        with:
-          registry: docker.pkg.github.com
-          name: docker.pkg.github.com/vladimirovsk/ITCoderNest
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
-          tags: "master"
+      - name: Checkout repository
+        uses: actions/checkout@v3
+#    runs-on: ubuntu-latest
+#    steps:
+#      - uses: actions/checkout@master
+#      - name: Publish directory
+#        uses: elgohr/Publish-Docker-Github-Action@master
+#        with:
+#          registry: docker.pkg.github.com
+#          name: docker.pkg.github.com/vladimirovsk/ITCoderNest
+#          username: ${{ secrets.DOCKER_USERNAME }}
+#          password: ${{ secrets.DOCKER_PASSWORD }}
+#          tags: "master"
   deploy:
     needs: [build]
     runs-on: ubuntu-latest
