@@ -37,4 +37,4 @@ jobs:
             cd project/BitCodersNest
             git checkout master
             git pull
-            docker-compose up -d --build
+            sudo docker-compose up -d --build
