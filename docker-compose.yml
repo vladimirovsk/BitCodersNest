@@ -40,6 +40,7 @@ services:
   mongo_itcoder:
     image: mongo:6.0.3
     container_name: mongo_itcoder
+    user: "${UID}:${GID}"
     restart: always
     env_file:
       - .env
