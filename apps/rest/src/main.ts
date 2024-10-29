@@ -36,7 +36,7 @@ async function bootstrap() {
     .addBearerAuth()
     .setTitle('REST ITCODER')
     .setDescription('The rest API description')
-    .setVersion('0.2')
+    .setVersion('0.3')
     .addTag('Auth')
     .build();
 
@@ -47,7 +47,7 @@ async function bootstrap() {
   app.setGlobalPrefix(`/api/${configService.get('VERSION') ?? 'v1'}`);
 
   const document = SwaggerModule.createDocument(app, configDocument, {
-    // ignoreGlobalPrefix: true,
+     ignoreGlobalPrefix: true,
   });
 
   SwaggerModule.setup('doc', app, document, {
