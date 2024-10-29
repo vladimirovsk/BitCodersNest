@@ -38,4 +38,5 @@ jobs:
             cd project/BitCodersNest
             git checkout dev
             git pull
+            chmod -R 755 /home/svladimirov/project/BitCodersNest/.docker/mongo-volume/
             docker-compose up -d --build --remove-orphans
