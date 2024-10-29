@@ -32,18 +32,6 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidationPipe());
   app.useLogger(app.get(AppLoggerService));
 
-  // explorer?: boolean;
-  // swaggerOptions?: Record<string, any>;
-  // customCss?: string;
-  // customCssUrl?: string;
-  // customJs?: string;
-  // customfavIcon?: string;
-  // swaggerUrl?: string;
-  // customSiteTitle?: string;
-  // validatorUrl?: string;
-  // url?: string;
-  // urls?: Record<'url' | 'name', string>[];
-
   const configDocument = new DocumentBuilder()
     .addBearerAuth()
     .setTitle('REST BITCODERS')
@@ -63,8 +51,8 @@ async function bootstrap() {
   });
 
   SwaggerModule.setup('doc', app, document, {
-    // swaggerUrl: 'https://api-doc.bitcoders.net',
-    // url: 'https://api-rest.bitcoders.net',
+     swaggerUrl: 'https://api-doc.bitcoders.net',
+     url: 'https://api-rest.bitcoders.net',
   });
 
   await app.listen(+configService.get('API_PORT') ?? 3000, async () => {
