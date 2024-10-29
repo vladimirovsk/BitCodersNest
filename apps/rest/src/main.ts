@@ -36,7 +36,7 @@ async function bootstrap() {
     .addBearerAuth()
     .setTitle('REST ITCODER')
     .setDescription('The rest API description')
-    .setVersion('0.3')
+    .setVersion('0.4')
     .addTag('Auth')
     .build();
 
