@@ -26,7 +26,7 @@ import { OpenAiModule } from './openai/open-ai.module';
 
     RateModule,
     PortCheckerModule,
-    DiscordBotModule,
+    // DiscordBotModule,
     SwaggerBotModule,
     TelegramBotModule,
     // OpenAiModule,

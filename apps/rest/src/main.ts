@@ -2,7 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { ValidationPipe, Logger } from '@nestjs/common';
-import { ConfigModule, ConfigService } from '@nestjs/config';
+import { ConfigService } from '@nestjs/config';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { AppLoggerService } from '../../../middleware/app-logger/app-logger.service';
 import { join } from 'path';
@@ -51,8 +51,8 @@ async function bootstrap() {
   });
 
   SwaggerModule.setup('doc', app, document, {
-     swaggerUrl: 'https://api-doc.bitcoders.net',
-     url: 'https://api-rest.bitcoders.net',
+     swaggerUrl: 'https://api-doc.it-coder.com',
+     url: 'https://api-rest.it-coder.com',
   });
 
   await app.listen(+configService.get('API_PORT') ?? 3000, async () => {
