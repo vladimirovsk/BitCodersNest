@@ -80,6 +80,8 @@ services:
       - 15672:15672
     networks:
       - itcoder
+    user: "${UID}:${GID}"
+
 networks:
   itcoder:
     driver: bridge
