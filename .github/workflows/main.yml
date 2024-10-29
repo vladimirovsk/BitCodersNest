@@ -22,9 +22,9 @@ jobs:
 #          username: ${{ secrets.DOCKER_USERNAME }}
 #          password: ${{ secrets.DOCKER_PASSWORD }}
 #          tags: "master"
-  deploy_master:
+  deploy_dev:
     needs: [build]
-    if: github.ref == 'refs/heads/master'
+    if: github.ref == 'refs/heads/dev'
     runs-on: ubuntu-latest
     steps:
       - name: Deploy to server
@@ -36,6 +36,6 @@ jobs:
           port: 33100
           script: |
             cd project/BitCodersNest
-            git checkout master
+            git checkout dev
             git pull
             docker-compose up -d --build --remove-orphans
