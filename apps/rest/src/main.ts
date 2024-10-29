@@ -34,7 +34,7 @@ async function bootstrap() {
 
   const configDocument = new DocumentBuilder()
     .addBearerAuth()
-    .setTitle('REST BITCODERS')
+    .setTitle('REST ITCODER')
     .setDescription('The rest API description')
     .setVersion('0.2')
     .addTag('Auth')
