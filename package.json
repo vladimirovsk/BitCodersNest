@@ -8,7 +8,7 @@
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "nest build rest && nest build websocket && nest build services",
-    "rest": "nest start rest",
+    "rest": "nest start rest --watch",
     "serv": "nest start services",
     "sock": "nest start websocket",
     "rest:dev": "nest start rest --watch",

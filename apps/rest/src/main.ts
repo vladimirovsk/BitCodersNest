@@ -47,7 +47,7 @@ async function bootstrap() {
   app.setGlobalPrefix(`/api/${configService.get('VERSION') ?? 'v1'}`);
 
   const document = SwaggerModule.createDocument(app, configDocument, {
-    // ignoreGlobalPrefix: true,
+     ignoreGlobalPrefix: true,
   });
 
   SwaggerModule.setup('doc', app, document, {
