@@ -11,6 +11,7 @@ import { UserModule } from '../src/users/user.module';
 import { AuthModule } from '../src/auth/auth.module';
 import { GoogleAuthModule } from '../src/google-auth/google-auth.module';
 import { ListenersModule } from './listeners/listeners.module';
+import { SkillsModule } from './skills/skills.module';
 
 @Module({
   imports: [
@@ -40,6 +41,7 @@ import { ListenersModule } from './listeners/listeners.module';
     }),
     // ScheduleModule.forRoot(),
     ProjectModule,
+    SkillsModule,
     UserModule,
     AuthModule,
     GoogleAuthModule,
