@@ -11,7 +11,8 @@ export class OllamaService {
 	}
 
 	async queryOllama(prompt: string): Promise<string> {
-		const url = 'http://localhost:11434/api/generate';
+		// const url = 'http://127.0.0.1:11434/api/generate';
+		const url = 'http://192.168.0.202:11434/api/generate';
 		const data = {
 			model: 'developer-ru:latest', // Укажите вашу модель, например, llama3.1
 			prompt: prompt,
