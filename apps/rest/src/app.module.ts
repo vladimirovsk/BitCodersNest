@@ -13,6 +13,7 @@ import { GoogleAuthModule } from '../src/google-auth/google-auth.module';
 import { ListenersModule } from './listeners/listeners.module';
 import { SkillsModule } from './skills/skills.module';
 import { HttpModule } from '@nestjs/axios';
+import { OllamaModule } from './ollama/ollama.module';
 
 @Module({
   imports: [
@@ -46,7 +47,7 @@ import { HttpModule } from '@nestjs/axios';
     UserModule,
     AuthModule,
     GoogleAuthModule,
-    HttpModule,
+    OllamaModule,
   ],
   providers: [AppService],
 

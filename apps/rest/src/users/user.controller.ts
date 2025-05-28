@@ -17,8 +17,6 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 import { JwtAuthGuard } from '../auth/guards/jwt.guard';
-import { UserSelectDto } from './dto/user-select.dto';
-import { UserEmail } from '../decorators/user-email.decorator';
 
 @ApiTags('User')
 @Controller('user')
